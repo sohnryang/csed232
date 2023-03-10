@@ -14,13 +14,13 @@ int main() {
   else {                  // case for binary operator
     std::cin >> operand2; // get second operand
     if (strcmp(op, "+") == 0)
-      result = operand1 + operand2;
+      result = operand1 + operand2; // calculate addition
     else if (strcmp(op, "-") == 0)
-      result = operand1 - operand2;
+      result = operand1 - operand2; // calculate substraction
     else if (strcmp(op, "*") == 0)
-      result = operand1 * operand2;
+      result = operand1 * operand2; // calculate multiplication
     else if (strcmp(op, "/"))
-      result = operand1 / operand2;
+      result = operand1 / operand2; // calculate division
   }
   std::cout.precision(3); // set float output
 
