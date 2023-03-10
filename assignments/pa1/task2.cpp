@@ -18,7 +18,7 @@ int main() {
     else if (strcmp(op, "-") == 0)
       result = operand1 - operand2;
     else if (strcmp(op, "*") == 0)
-      result = operand1 + operand2;
+      result = operand1 * operand2;
     else if (strcmp(op, "/"))
       result = operand1 / operand2;
   }
