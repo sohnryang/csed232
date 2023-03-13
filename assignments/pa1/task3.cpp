@@ -2,6 +2,11 @@
 #include <iostream>
 #include <string>
 
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
 // parse_int parses int in std::string.
 int parse_int(const std::string &str) {
   int base = 10;                 // base 10 integer by default
@@ -28,16 +33,16 @@ int parse_int(const std::string &str) {
 
 int main() {
   char op[7]; // C style string for operator
-  std::string operand1_str, operand2_str;
+  string operand1_str, operand2_str;
   int result;
-  std::cin >> op >> operand1_str;         // get operator and first operand
+  cin >> op >> operand1_str;                 // get operator and first operand
   int operand1 = parse_int(operand1_str); // parse string form of operand 1
   if (strcmp(op, "square") == 0)          // check unary operator
     result = operand1 * operand1;         // calculate square
   else if (strcmp(op, "sqrt") == 0)
-    result = sqrt(operand1);                // calculate sqrt
-  else {                                    // case for binary operator
-    std::cin >> operand2_str;               // get second operand
+    result = sqrt(operand1); // calculate sqrt
+  else {                     // case for binary operator
+    cin >> operand2_str;     // get second operand
     int operand2 = parse_int(operand2_str); // parse string form of operator 2
     if (strcmp(op, "+") == 0)
       result = operand1 + operand2; // calculate addition
