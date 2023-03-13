@@ -23,7 +23,7 @@ int main() {
       result = operand1 - operand2; // calculate substraction
     else if (strcmp(op, "*") == 0)
       result = operand1 * operand2; // calculate multiplication
-    else if (strcmp(op, "/"))
+    else if (strcmp(op, "/") == 0)
       result = operand1 / operand2; // calculate division
   }
   cout.precision(3); // set float output

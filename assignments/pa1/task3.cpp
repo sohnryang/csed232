@@ -50,7 +50,7 @@ int main() {
       result = operand1 - operand2; // calculate substraction
     else if (strcmp(op, "*") == 0)
       result = operand1 * operand2; // calculate multiplication
-    else if (strcmp(op, "/"))
+    else if (strcmp(op, "/") == 0)
       result = operand1 / operand2; // calculate division
   }
   std::cout << result << std::endl;
