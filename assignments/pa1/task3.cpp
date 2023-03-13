@@ -8,11 +8,14 @@ using std::endl;
 using std::string;
 
 // parse_int parses int in std::string.
-int parse_int(const std::string &str) {
-  int base = 10;                 // base 10 integer by default
-  std::string number_part = str; // string with stripped prefix
-  if (str.find("0X") == 0) {     // if the prefix indicates base 16
+int parse_int(const string &str) {
+  int base = 10;             // base 10 integer by default
+  string number_part = str;  // string with stripped prefix
+  if (str.find("0X") == 0) { // if the prefix indicates base 16
     base = 16;
+    number_part = str.substr(2);    // strip prefix
+  } else if (str.find("0b") == 0) { // if the prefix indicates base 2
+    base = 2;
     number_part = str.substr(2);   // strip prefix
   } else if (str.find("0") == 0) { // if the prefix indicates base 8
     base = 8;
