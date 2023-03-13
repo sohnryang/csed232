@@ -1,4 +1,5 @@
 #include <cstring>
+#include <ios>
 #include <iostream>
 #include <string>
 
@@ -37,16 +38,17 @@ int parse_int(const string &str) {
 int main() {
   char op[7]; // C style string for operator
   string operand1_str, operand2_str;
-  int result;
+  double result;
   cin >> op >> operand1_str;                 // get operator and first operand
-  int operand1 = parse_int(operand1_str); // parse string form of operand 1
-  if (strcmp(op, "square") == 0)          // check unary operator
-    result = operand1 * operand1;         // calculate square
+  double operand1 = parse_int(operand1_str); // parse string form of operand 1
+  if (strcmp(op, "square") == 0)             // check unary operator
+    result = operand1 * operand1;            // calculate square
   else if (strcmp(op, "sqrt") == 0)
     result = sqrt(operand1); // calculate sqrt
   else {                     // case for binary operator
     cin >> operand2_str;     // get second operand
-    int operand2 = parse_int(operand2_str); // parse string form of operator 2
+    double operand2 =
+        parse_int(operand2_str); // parse string form of operator 2
     if (strcmp(op, "+") == 0)
       result = operand1 + operand2; // calculate addition
     else if (strcmp(op, "-") == 0)
@@ -56,6 +58,7 @@ int main() {
     else if (strcmp(op, "/") == 0)
       result = operand1 / operand2; // calculate division
   }
-  std::cout << result << std::endl;
+  cout.precision(3);
+  cout << std::fixed << result << endl;
   return 0;
 }
