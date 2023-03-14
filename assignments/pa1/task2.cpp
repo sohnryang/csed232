@@ -9,7 +9,7 @@ using std::endl;
 
 int main() {
   char op[7]; // C style string for operator
-  double operand1, operand2, result;
+  float operand1, operand2, result;
   cin >> op >> operand1;         // get operator and first operand
   if (strcmp(op, "square") == 0) // check unary operator
     result = operand1 * operand1;
