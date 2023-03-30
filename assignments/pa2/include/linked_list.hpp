@@ -20,8 +20,7 @@ public:
   node<T> *tail_node() const;
   void push_back(T data);
   node<T> *search(const T &data) const;
-  template <typename F>
-  node<T> *search(const T &data, const F &comparator) const;
+  template <typename F> node<T> *search_pred(const F &predicate) const;
   void remove(node<T> *node_to_remove);
 
   bool operator==(const list<T> &other) const;
@@ -73,19 +72,15 @@ template <typename T> void list<T>::push_back(T data) {
 }
 
 template <typename T> node<T> *list<T>::search(const T &data) const {
-  return search(data, [](const T &v1, const T &v2) {
-    if (v1 == v2)
-      return 0;
-    return 1;
-  });
+  return search_pred([&data](const T &v) { return v == data; });
 }
 
 template <typename T>
 template <typename F>
-node<T> *list<T>::search(const T &data, const F &comparator) const {
+node<T> *list<T>::search_pred(const F &predicate) const {
   node<T> *current = head->next;
   for (int i = 0; i < count; i++) {
-    if (comparator(current->data, data) == 0)
+    if (predicate(current->data))
       return current;
     current = current->next;
   }
