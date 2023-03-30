@@ -39,9 +39,7 @@ TEST(List, Search) {
   EXPECT_EQ(ls.search(2), ls.head_node()->next->next->next);
   EXPECT_EQ(ls.search(3), ls.head_node()->next->next->next->next);
   EXPECT_EQ(ls.search(4), nullptr);
-  EXPECT_EQ(
-      ls.search(-1, [](int v1, int v2) { return abs(v1) != abs(v2); })->data,
-      1);
+  EXPECT_EQ(ls.search_pred([](int v) { return v < 0; })->data, -1);
 
   list<std::string> strls;
   strls.push_back("hell");
@@ -49,10 +47,7 @@ TEST(List, Search) {
   strls.push_back("abcd");
   EXPECT_EQ(strls.search("hell")->data, "hell");
   EXPECT_EQ(
-      strls
-          .search("abcd", [](const auto &v1,
-                             const auto &v2) { return v1.size() != v2.size(); })
-          ->data,
+      strls.search_pred([](const auto &v) { return v.size() == 4; })->data,
       "hell");
 }
 
