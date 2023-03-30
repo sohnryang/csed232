@@ -23,6 +23,8 @@ public:
   template <typename F>
   node<T> *search(const T &data, const F &comparator) const;
   void remove(node<T> *node_to_remove);
+
+  bool operator==(const list<T> &other) const;
 };
 
 template <typename T> list<T>::list() : count(0) {
@@ -95,6 +97,19 @@ template <typename T> void list<T>::remove(node<T> *node_to_remove) {
   node_to_remove->next->prev = node_to_remove->prev;
   delete node_to_remove;
   count--;
+}
+
+template <typename T> bool list<T>::operator==(const list<T> &other) const {
+  if (count != other.count)
+    return false;
+  node<T> *current = head->next, *other_current = other.head->next;
+  for (int i = 0; i < count; i++) {
+    if (current->data != other_current->data)
+      return false;
+    current = current->next;
+    other_current = other_current->next;
+  }
+  return true;
 }
 
 template <typename T, typename F>

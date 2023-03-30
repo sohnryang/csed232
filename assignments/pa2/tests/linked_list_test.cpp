@@ -90,3 +90,12 @@ TEST(List, Sort) {
   EXPECT_EQ(sorted.head_node()->next->next->next->next->next->data, 10);
   EXPECT_EQ(sorted.head_node()->next->next->next->next->next->next->data, 13);
 }
+
+TEST(List, Equality) {
+  list<int> ls;
+  ls.push_back(1);
+  ls.push_back(2);
+  ls.push_back(0);
+  list<int> ls2(ls);
+  EXPECT_EQ(ls, ls2);
+}
