@@ -6,12 +6,12 @@
 
 class pivot_table {
 private:
-  list<category> categories;
+  list<label_type> label_types;
   list<pivot_table_column> columns;
 
 public:
   pivot_table(const pivot_table &other);
-  pivot_table(const list<category> &categories);
+  pivot_table(const list<label_type> &label_types);
 
   void append(const student &data);
   list<pivot_table_column> sorted();

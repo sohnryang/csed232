@@ -15,11 +15,11 @@ bool student::operator==(const student &other) const {
          age == other.age;
 }
 
-std::string student::get_label(category label_category) const {
+std::string student::get_label(label_type label_category) const {
   switch (label_category) {
-  case category::DEPT:
+  case label_type::DEPT:
     return dept;
-  case category::GENDER:
+  case label_type::GENDER:
     return gender;
   }
 }

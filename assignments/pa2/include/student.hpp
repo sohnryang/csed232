@@ -2,7 +2,7 @@
 
 #include <string>
 
-enum class category { DEPT, GENDER };
+enum class label_type { DEPT, GENDER };
 
 class student {
 private:
@@ -15,6 +15,6 @@ public:
   student(std::string dept, std::string name, std::string gender, int age);
 
   bool operator==(const student &other) const;
-  std::string get_label(category label_category) const;
+  std::string get_label(label_type label_category) const;
   int get_value() const;
 };

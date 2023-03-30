@@ -2,15 +2,15 @@
 #include <pivot_table.hpp>
 
 pivot_table::pivot_table(const pivot_table &other)
-    : categories(other.categories), columns(other.columns) {}
+    : label_types(other.label_types), columns(other.columns) {}
 
-pivot_table::pivot_table(const list<category> &categories)
-    : categories(categories), columns() {}
+pivot_table::pivot_table(const list<label_type> &label_types)
+    : label_types(label_types), columns() {}
 
 void pivot_table::append(const student &data) {
   list<std::string> labels;
-  node<category> *current = categories.head_node()->next;
-  for (int i = 0; i < categories.size(); i++) {
+  node<label_type> *current = label_types.head_node()->next;
+  for (int i = 0; i < label_types.size(); i++) {
     labels.push_back(data.get_label(current->data));
     current = current->next;
   }
