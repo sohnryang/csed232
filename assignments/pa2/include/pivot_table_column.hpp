@@ -10,6 +10,7 @@ private:
   list<int> values;
 
 public:
+  pivot_table_column();
   pivot_table_column(const pivot_table_column &other);
   pivot_table_column(const list<std::string> &labels);
 
