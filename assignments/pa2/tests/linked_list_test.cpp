@@ -1,6 +1,5 @@
 #include <linked_list.hpp>
 
-#include <functional>
 #include <string>
 
 #include <gtest/gtest.h>
