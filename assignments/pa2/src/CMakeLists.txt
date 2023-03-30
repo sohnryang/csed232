@@ -1,0 +1,5 @@
+add_library(pa2lib linked_list.cpp)
+target_include_directories(pa2lib PRIVATE "${PA2_ROOT}/include")
+add_executable(pa2 main.cpp)
+target_include_directories(pa2 PRIVATE "${PA2_ROOT}/include")
+target_link_libraries(pa2 PRIVATE pa2lib)
