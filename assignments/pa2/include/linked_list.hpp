@@ -34,7 +34,7 @@ template <typename T> list<T>::list() : count(0) {
   tail->prev = head;
 }
 
-template <typename T> list<T>::list(const list<T> &other) : count(other.count) {
+template <typename T> list<T>::list(const list<T> &other) : count(0) {
   head = new node<T>();
   tail = new node<T>();
   head->next = tail;
