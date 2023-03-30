@@ -25,3 +25,5 @@ std::string student::get_label(label_type label_category) const {
 }
 
 int student::get_value() const { return age; }
+
+std::string student::get_name() const { return name; }
