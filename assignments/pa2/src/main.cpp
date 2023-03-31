@@ -3,6 +3,7 @@
 #include <pivot_table_column.hpp>
 #include <student.hpp>
 
+#include <cmath>
 #include <iostream>
 
 enum class command_type {
@@ -175,7 +176,7 @@ int main() {
                  [](const std::string &label) { std::cout << label << "\t"; });
         switch (function_id) {
         case 1:
-          std::cout << col.average_value();
+          std::cout << round(col.average_value() * 10) / 10;
           break;
         case 2:
           std::cout << col.max_value();
