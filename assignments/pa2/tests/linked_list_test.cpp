@@ -93,3 +93,20 @@ TEST(List, Equality) {
   list<int> ls2(ls);
   EXPECT_EQ(ls, ls2);
 }
+
+TEST(List, Map) {
+  list<int> ls;
+  ls.push_back(1);
+  ls.push_back(2);
+  ls.push_back(0);
+  list<int> negated = map_function<int>(ls, [](int v) { return -v; });
+  EXPECT_EQ(negated.head_node()->next->data, -1);
+  EXPECT_EQ(negated.head_node()->next->next->data, -2);
+  EXPECT_EQ(negated.head_node()->next->next->next->data, 0);
+
+  list<std::string> strls;
+  strls.push_back("hell");
+  strls.push_back("world");
+  list<int> lens =
+      map_function<int>(strls, [](const std::string &s) { return s.length(); });
+}

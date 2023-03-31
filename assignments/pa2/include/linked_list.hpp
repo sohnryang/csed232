@@ -153,3 +153,14 @@ list<T> sort(const list<T> &list_to_sort, const F &comparator) {
           right_sorted = sort(right, comparator);
   return merge_lists(left_sorted, right_sorted, comparator);
 }
+
+template <typename U, typename F, typename T>
+list<U> map_function(const list<T> &list_to_map, const F &func) {
+  list<U> result;
+  node<T> *current = list_to_map.head_node()->next;
+  for (int i = 0; i < list_to_map.size(); i++) {
+    result.push_back(func(current->data));
+    current = current->next;
+  }
+  return result;
+}
