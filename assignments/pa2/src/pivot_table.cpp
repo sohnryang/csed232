@@ -22,6 +22,7 @@ void pivot_table::append(const student &data) {
     pivot_table_column new_column(labels);
     columns.push_back(new_column);
     append(data);
+    return;
   }
   column_node->data.append(data.get_value());
 }
