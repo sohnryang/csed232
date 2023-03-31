@@ -41,3 +41,5 @@ list<pivot_table_column> pivot_table::sorted() {
         return 0;
       });
 }
+
+list<label_type> pivot_table::get_label_types() const { return label_types; }

@@ -15,4 +15,5 @@ public:
 
   void append(const student &data);
   list<pivot_table_column> sorted();
+  list<label_type> get_label_types() const;
 };
