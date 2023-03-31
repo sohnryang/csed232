@@ -8,12 +8,8 @@ pivot_table::pivot_table(const list<label_type> &label_types)
     : label_types(label_types), columns() {}
 
 void pivot_table::append(const student &data) {
-  list<std::string> labels;
-  node<label_type> *current = label_types.head_node()->next;
-  for (int i = 0; i < label_types.size(); i++) {
-    labels.push_back(data.get_label(current->data));
-    current = current->next;
-  }
+  list<std::string> labels = map_function<std::string>(
+      label_types, [&data](label_type t) { return data.get_label(t); });
   node<pivot_table_column> *column_node =
       columns.search_pred([&labels](const pivot_table_column &v) {
         return v.get_labels() == labels;
