@@ -42,4 +42,6 @@ float pivot_table_column::average_value() const {
   return (float)sum / values.size();
 }
 
+list<std::string> pivot_table_column::get_labels() const { return labels; }
+
 void pivot_table_column::append(int value) { values.push_back(value); }
