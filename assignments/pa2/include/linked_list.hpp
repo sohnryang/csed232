@@ -164,3 +164,12 @@ list<U> map_function(const list<T> &list_to_map, const F &func) {
   }
   return result;
 }
+
+template <typename F, typename T>
+void for_each(const list<T> &list_to_iterate, const F &func) {
+  node<T> *current = list_to_iterate.head_node()->next;
+  for (int i = 0; i < list_to_iterate.size(); i++) {
+    func(current->data);
+    current = current->next;
+  }
+}
