@@ -19,7 +19,7 @@ std::string student::get_label(label_type label_category) const {
   switch (label_category) {
   case label_type::DEPT:
     return dept;
-  case label_type::GENDER:
+  default:
     return gender;
   }
 }
