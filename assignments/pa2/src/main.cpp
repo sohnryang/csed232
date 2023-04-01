@@ -129,11 +129,8 @@ int main() {
     case command_type::PRINT: {
       list<student> sorted =
           sort(student_list, [](const student &s1, const student &s2) {
-            int dept_comparision = s1.get_label(label_type::DEPT)
-                                       .compare(s2.get_label(label_type::DEPT)),
-                gender_comparision =
-                    s1.get_label(label_type::GENDER)
-                        .compare(s2.get_label(label_type::GENDER)),
+            int dept_comparision = s1.get_dept().compare(s2.get_dept()),
+                gender_comparision = s1.get_gender().compare(s2.get_gender()),
                 name_comparision = s1.get_name().compare(s2.get_name()),
                 age_comparision = s1.get_value() - s2.get_value();
             if (dept_comparision != 0)
