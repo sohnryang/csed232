@@ -119,9 +119,8 @@ int input_function() {
 void print_whole_table(const list<student> &list_to_print) {
   std::cout << "Dept\tGender\tName\tAge" << std::endl;
   for_each(list_to_print, [](const student &s) {
-    std::cout << s.get_label(label_type::DEPT) << "\t"
-              << s.get_label(label_type::GENDER) << "\t" << s.get_name() << "\t"
-              << s.get_value() << std::endl;
+    std::cout << s.get_dept() << "\t" << s.get_gender() << "\t" << s.get_name()
+              << "\t" << s.get_value() << std::endl;
   });
 }
 
