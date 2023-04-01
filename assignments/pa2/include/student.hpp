@@ -16,6 +16,8 @@ public:
 
   bool operator==(const student &other) const;
   std::string get_label(label_type label_category) const;
+  std::string get_dept() const;
+  std::string get_gender() const;
   int get_value() const;
   std::string get_name() const;
 };

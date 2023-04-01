@@ -24,6 +24,10 @@ std::string student::get_label(label_type label_category) const {
   }
 }
 
+std::string student::get_dept() const { return dept; }
+
+std::string student::get_gender() const { return gender; }
+
 int student::get_value() const { return age; }
 
 std::string student::get_name() const { return name; }
