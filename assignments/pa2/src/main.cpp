@@ -5,6 +5,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <string>
 
 enum class command_type {
   ADD = 1,
