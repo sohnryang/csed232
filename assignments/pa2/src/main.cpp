@@ -25,6 +25,33 @@ void print_menu() {
   std::cout << "------------------------" << std::endl;
 }
 
+template <typename T, typename F>
+T input_with_retry(const std::string &prompt, const F &check_input) {
+  while (true) {
+    std::cout << prompt;
+    T result;
+    std::cin >> result;
+    // No sane person would exploit this, right?
+    std::cin.ignore(1024, '\n');
+    if (check_input(result))
+      return result;
+    std::cout << "Invalid input: " << result << std::endl;
+  }
+}
+
+template <typename F>
+std::string input_line_with_retry(const std::string &prompt,
+                                  const F &check_input) {
+  while (true) {
+    std::cout << prompt;
+    std::string result;
+    std::getline(std::cin, result);
+    if (check_input(result))
+      return result;
+    std::cout << "Invalid input: " << result << std::endl;
+  }
+}
+
 student input_student() {
   std::string dept, gender, name;
   int age;
