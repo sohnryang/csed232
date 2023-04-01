@@ -52,25 +52,31 @@ std::string input_line_with_retry(const std::string &prompt,
   }
 }
 
-student input_student() {
+student input_student(const list<std::string> &dept_list) {
   std::string dept, gender, name;
   int age;
-  std::cout << "Dept: ";
-  std::cin >> dept;
-  std::cout << "Gender: ";
-  std::cin >> gender;
-  std::cout << "Name: ";
-  std::cin >> name;
-  std::cout << "Age: ";
-  std::cin >> age;
+  dept = input_line_with_retry("Dept: ", [&dept_list](const std::string &s) {
+    for (const char &ch : s)
+      if (ch < 'A' || ch > 'Z')
+        return false;
+    if (dept_list.size() < 9)
+      return true;
+    return dept_list.search(s) != nullptr;
+  });
+  gender = input_line_with_retry(
+      "Gender: ", [](const std::string &s) { return s == "F" || s == "M"; });
+  name = input_line_with_retry("Name: ", [](const std::string &s) {
+    return s.find(" ") == std::string::npos;
+  });
+  age =
+      input_with_retry<int>("Age: ", [](int v) { return 18 <= v && v <= 30; });
   student s(dept, name, gender, age);
   return s;
 }
 
 command_type input_command() {
-  std::cout << "Selection: ";
-  int command_id;
-  std::cin >> command_id;
+  int command_id = input_with_retry<int>(
+      "Selection: ", [](int v) { return 1 <= v && v <= 5; });
   return static_cast<command_type>(command_id);
 }
 
@@ -80,24 +86,14 @@ list<label_type> input_category() {
   std::cout << "2. Gender" << std::endl;
   std::cout << "3. Dept and Gender" << std::endl;
   std::cout << "----------------------------" << std::endl;
-  while (true) {
-    std::cout << "Selection: ";
-    int category_id;
-    std::cin >> category_id;
-    list<label_type> result;
-    if (category_id == 1) {
-      result.push_back(label_type::DEPT);
-      return result;
-    } else if (category_id == 2) {
-      result.push_back(label_type::GENDER);
-      return result;
-    } else if (category_id == 3) {
-      result.push_back(label_type::DEPT);
-      result.push_back(label_type::GENDER);
-      return result;
-    }
-    std::cout << "Invalid input: " << category_id << std::endl;
-  }
+  int category_id = input_with_retry<int>(
+      "Selection: ", [](int v) { return 1 <= v && v <= 3; });
+  list<label_type> result;
+  if (category_id & 1)
+    result.push_back(label_type::DEPT);
+  else if (category_id & 2)
+    result.push_back(label_type::GENDER);
+  return result;
 }
 
 int input_function() {
@@ -106,14 +102,8 @@ int input_function() {
   std::cout << "2. Max" << std::endl;
   std::cout << "3. Min" << std::endl;
   std::cout << "----------------------------" << std::endl;
-  while (true) {
-    std::cout << "Selection: ";
-    int function_id;
-    std::cin >> function_id;
-    if (1 <= function_id && function_id <= 3)
-      return function_id;
-    std::cout << "Invalid input: " << function_id << std::endl;
-  }
+  return input_with_retry<int>("Selection: ",
+                               [](int v) { return 1 <= v && v <= 3; });
 }
 
 void print_whole_table(const list<student> &list_to_print) {
@@ -127,12 +117,12 @@ void print_whole_table(const list<student> &list_to_print) {
 int main() {
   bool finish = false;
   list<student> student_list;
+  list<std::string> dept_list;
   while (!finish) {
-    print_menu();
     command_type command = input_command();
     switch (command) {
     case command_type::ADD: {
-      student new_student = input_student();
+      student new_student = input_student(dept_list);
       if (student_list.search(new_student) != nullptr)
         std::cout << "The student already exists." << std::endl;
       else {
@@ -142,7 +132,7 @@ int main() {
       break;
     }
     case command_type::DELETE: {
-      student to_delete = input_student();
+      student to_delete = input_student({});
       auto node_to_delete = student_list.search(to_delete);
       if (node_to_delete == nullptr)
         std::cout << "Can't Delete it" << std::endl;
