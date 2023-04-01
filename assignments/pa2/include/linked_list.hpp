@@ -46,7 +46,7 @@ template <typename T> list<T>::list(const list<T> &other) : count(0) {
 }
 
 template <typename T> list<T>::~list() {
-  node<T> *current = head->next;
+  node<T> *current = head;
   while (current) {
     node<T> *next_node = current->next;
     delete current;
