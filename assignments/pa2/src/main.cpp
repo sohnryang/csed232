@@ -94,7 +94,7 @@ list<label_type> input_category() {
   list<label_type> result;
   if (category_id & 1)
     result.push_back(label_type::DEPT);
-  else if (category_id & 2)
+  if (category_id & 2)
     result.push_back(label_type::GENDER);
   return result;
 }
