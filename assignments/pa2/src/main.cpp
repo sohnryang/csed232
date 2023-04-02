@@ -15,16 +15,6 @@ enum class command_type {
   EXIT = 5,
 };
 
-void print_menu() {
-  std::cout << "----------MENU----------" << std::endl;
-  std::cout << "1. Add a student" << std::endl;
-  std::cout << "2. Delete a student" << std::endl;
-  std::cout << "3. Print the student's list" << std::endl;
-  std::cout << "4. Pivot Table" << std::endl;
-  std::cout << "5. Exit" << std::endl;
-  std::cout << "------------------------" << std::endl;
-}
-
 template <typename T, typename F>
 T input_with_retry(const std::string &prompt, const F &check_input) {
   while (true) {
@@ -81,6 +71,13 @@ student input_student(const list<std::string> &dept_list) {
 }
 
 command_type input_command() {
+  std::cout << "----------MENU----------" << std::endl;
+  std::cout << "1. Add a student" << std::endl;
+  std::cout << "2. Delete a student" << std::endl;
+  std::cout << "3. Print the student's list" << std::endl;
+  std::cout << "4. Pivot Table" << std::endl;
+  std::cout << "5. Exit" << std::endl;
+  std::cout << "------------------------" << std::endl;
   int command_id = input_with_retry<int>(
       "Selection: ", [](int v) { return 1 <= v && v <= 5; });
   return static_cast<command_type>(command_id);
