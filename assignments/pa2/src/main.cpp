@@ -31,6 +31,12 @@ T input_with_retry(const std::string &prompt, const F &check_input) {
     std::cout << prompt;
     T result;
     std::cin >> result;
+    if (std::cin.fail()) {
+      std::cin.clear();
+      std::cin.ignore(1024, '\n');
+      std::cout << "Parse failed" << std::endl;
+      continue;
+    }
     // No sane person would exploit this, right?
     std::cin.ignore(1024, '\n');
     if (check_input(result))
