@@ -185,12 +185,31 @@ void print_whole_table(const list<student> &list_to_print) {
   });
 }
 
+// collect_depts collects departments of student_list to a list of strings.
+list<std::string> collect_depts(const list<student> &student_list) {
+  // Create an empty list of department names to return
+  list<std::string> depts;
+  // For each student in the input list, add their department name to the output
+  // list if it hasn't already been added
+  for_each(student_list, [&depts](const student &s) {
+    // Get the department name of the current student
+    std::string dept = s.get_dept();
+    // If the department name has already been added to the output list, skip to
+    // the next student
+    if (depts.search(dept))
+      return;
+    // Otherwise, add the department name to the output list
+    depts.push_back(dept);
+  });
+  // Return the list of department names
+  return depts;
+}
+
 int main() {
   // Initialize a boolean flag to keep track of when to exit the loop.
   bool finish = false;
-  // Initialize two lists: one to store students, one to store departments.
+  // Initialize list for storing students.
   list<student> student_list;
-  list<std::string> dept_list;
   // Start a loop until the finish flag is set to true.
   while (!finish) {
     // Get the user's input command.
@@ -198,6 +217,8 @@ int main() {
     // Switch statement to execute code based on the input command.
     switch (command) {
     case command_type::ADD: {
+      // Collect list of departments.
+      list<std::string> dept_list = collect_depts(student_list);
       // Get input for a new student.
       student new_student = input_student(dept_list);
       // Check if the student already exists.
