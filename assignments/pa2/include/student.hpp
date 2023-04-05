@@ -2,6 +2,7 @@
 
 #include <string>
 
+// label_type holds data for label types.
 enum class label_type { DEPT, GENDER };
 
 // student class holds data for a student.

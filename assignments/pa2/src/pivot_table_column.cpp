@@ -13,20 +13,33 @@ pivot_table_column::pivot_table_column(const list<std::string> &labels)
     : labels(labels), values() {}
 
 int pivot_table_column::max_value() const {
+  // Initialize the result to the first value in the list of values.
   int result = values.head_node()->next->data;
+  // Iterate over the remaining values in the list, using a lambda function to
+  // update the maximum.
   for_each(values, [&result](int v) { result = max(result, v); });
+  // Return the maximum value.
   return result;
 }
 
 int pivot_table_column::min_value() const {
+  // Initialize the result to the first value in the list of values.
   int result = values.head_node()->next->data;
+  // Iterate over the remaining values in the list, using a lambda function to
+  // update the minimum.
   for_each(values, [&result](int v) { result = min(result, v); });
+  // Return the minimum value.
   return result;
 }
 
 float pivot_table_column::average_value() const {
+  // Initialize a sum to zero.
   int sum = 0;
+  // Iterate over the values in the list, using a lambda function to update the
+  // sum.
   for_each(values, [&sum](int v) { sum += v; });
+  // Calculate and return the average value by dividing the sum by the number of
+  // values.
   return (float)sum / values.size();
 }
 
