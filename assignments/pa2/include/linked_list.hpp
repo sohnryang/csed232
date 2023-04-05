@@ -61,11 +61,8 @@ template <typename T> list<T>::list(const list<T> &other) : count(0) {
   tail = new node<T>();
   head->next = tail;
   tail->prev = head;
-  node<T> *current = other.head->next;
-  for (int i = 0; i < other.size(); i++) {
-    push_back(current->data);
-    current = current->next;
-  }
+
+  for_each(other, [this](const T &v) { push_back(v); });
 }
 
 template <typename T> list<T>::~list() {
