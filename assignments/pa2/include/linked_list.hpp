@@ -198,6 +198,18 @@ list<T> merge_lists(const list<T> &left, const list<T> &right,
   return merged;
 }
 
+// sort with default ordering.
+template <typename T> list<T> sort(const list<T> &list_to_sort) {
+  return sort(list_to_sort, [](const T &v1, const T &v2) {
+    if (v1 < v2)
+      return -1;
+    else if (v1 == v2)
+      return 0;
+    return 1;
+  });
+}
+
+// sort with comparator function.
 template <typename T, typename F>
 list<T> sort(const list<T> &list_to_sort, const F &comparator) {
   if (list_to_sort.size() <= 1) // it is already sorted, so return it.
