@@ -229,20 +229,7 @@ int main() {
     }
     case command_type::PRINT: {
       // Create a sorted list of students.
-      list<student> sorted =
-          sort(student_list, [](const student &s1, const student &s2) {
-            int dept_comparision = s1.get_dept().compare(s2.get_dept()),
-                gender_comparision = s1.get_gender().compare(s2.get_gender()),
-                name_comparision = s1.get_name().compare(s2.get_name()),
-                age_comparision = s1.get_value() - s2.get_value();
-            if (dept_comparision != 0)
-              return dept_comparision;
-            if (gender_comparision != 0)
-              return gender_comparision;
-            if (name_comparision != 0)
-              return name_comparision;
-            return age_comparision;
-          });
+      list<student> sorted = sort(student_list);
       // Print the entire table of sorted students.
       print_whole_table(sorted);
       break;
