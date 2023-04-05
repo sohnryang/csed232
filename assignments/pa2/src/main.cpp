@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 
+// command_type is an enum class for command types.
 enum class command_type {
   ADD = 1,
   DELETE = 2,
@@ -15,6 +16,8 @@ enum class command_type {
   EXIT = 5,
 };
 
+// input_with_retry gets input from stdin and retries inputs if
+// check_input(input) is false, for cin failed to parse input.
 template <typename T, typename F>
 T input_with_retry(const std::string &prompt, const F &check_input) {
   while (true) {
@@ -35,6 +38,8 @@ T input_with_retry(const std::string &prompt, const F &check_input) {
   }
 }
 
+// input_line_with_retry gets a line from stdin and retries if
+// check_input(input) is false.
 template <typename F>
 std::string input_line_with_retry(const std::string &prompt,
                                   const F &check_input) {
@@ -48,6 +53,7 @@ std::string input_line_with_retry(const std::string &prompt,
   }
 }
 
+// input_student gets an input for student object.
 student input_student(const list<std::string> &dept_list) {
   std::string dept, gender, name;
   int age;
@@ -70,6 +76,7 @@ student input_student(const list<std::string> &dept_list) {
   return s;
 }
 
+// input_command gets an input for command.
 command_type input_command() {
   std::cout << "----------MENU----------" << std::endl;
   std::cout << "1. Add a student" << std::endl;
@@ -83,6 +90,7 @@ command_type input_command() {
   return static_cast<command_type>(command_id);
 }
 
+// input_category gets an input for label types.
 list<label_type> input_category() {
   std::cout << "----------Category----------" << std::endl;
   std::cout << "1. Dept" << std::endl;
@@ -99,6 +107,7 @@ list<label_type> input_category() {
   return result;
 }
 
+// input_function gets an input for pivot table function.
 int input_function() {
   std::cout << "----------Function----------" << std::endl;
   std::cout << "1. Average" << std::endl;
@@ -109,6 +118,7 @@ int input_function() {
                                [](int v) { return 1 <= v && v <= 3; });
 }
 
+// print_whole_table prints the list of students in sorted order.
 void print_whole_table(const list<student> &list_to_print) {
   std::cout << "Dept\tGender\tName\tAge" << std::endl;
   for_each(list_to_print, [](const student &s) {

@@ -4,25 +4,48 @@
 
 #include <string>
 
+// list is a doubly-linked list implementation.
 template <typename T> class list {
 private:
+  // Count of nodes.
   int count;
+
+  // Head and tail pointers.
   node<T> *head, *tail;
 
 public:
+  // Default constructor.
   list();
+
+  // Copy constructor.
   list(const list<T> &other);
+
+  // Destructor for deallocation.
   ~list();
 
+  // Check if the list is empty.
   bool empty() const;
+
+  // Calculate the size of the list.
   int size() const;
+
+  // Getter for head node.
   node<T> *head_node() const;
+
+  // Getter for tail node.
   node<T> *tail_node() const;
+
+  // Append a data to the end of the list.
   void push_back(T data);
+
+  // Search for a matching value
   node<T> *search(const T &data) const;
+
+  // Search for a value x where predicate(x) == true.
   template <typename F> node<T> *search_pred(const F &predicate) const;
   void remove(node<T> *node_to_remove);
 
+  // Check equality between lists. Only used for unit tests.
   bool operator==(const list<T> &other) const;
 };
 
