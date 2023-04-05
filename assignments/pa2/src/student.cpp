@@ -15,6 +15,29 @@ bool student::operator==(const student &other) const {
          age == other.age;
 }
 
+bool student::operator<(const student &other) const {
+  // Check if comparision can be concluded from dept.
+  if (dept < other.dept)
+    return true;
+  else if (dept > other.dept)
+    return false;
+
+  // Check if comparision can be concluded from gender.
+  if (gender < other.gender)
+    return true;
+  else if (gender > other.gender)
+    return false;
+
+  // Check if comparision can be concluded from name.
+  if (name < other.name)
+    return true;
+  else if (name > other.name)
+    return false;
+
+  // If other fields are the same, compare with age.
+  return age < other.age;
+}
+
 std::string student::get_label(label_type label_category) const {
   switch (label_category) {
   case label_type::DEPT:

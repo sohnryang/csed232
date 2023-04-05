@@ -26,6 +26,9 @@ public:
   // Overloaded equality operator for checking equality.
   bool operator==(const student &other) const;
 
+  // Overloaded less-than operator for comparision.
+  bool operator<(const student &other) const;
+
   // Get labels with corresponding label type.
   std::string get_label(label_type label_category) const;
 
