@@ -160,6 +160,8 @@ template <typename T> bool list<T>::operator==(const list<T> &other) const {
   return true;
 }
 
+// merge_lists merges two sorted lists, left and right using comparision
+// function comparator.
 template <typename T, typename F>
 list<T> merge_lists(const list<T> &left, const list<T> &right,
                     const F &comparator) {
@@ -235,6 +237,8 @@ list<T> sort(const list<T> &list_to_sort, const F &comparator) {
   return merge_lists(left_sorted, right_sorted, comparator);
 }
 
+// map_function implements common high-order function, map of functional
+// programming paradigm.
 template <typename U, typename F, typename T>
 list<U> map_function(const list<T> &list_to_map, const F &func) {
   // Create a list to store the mapped elements.
@@ -251,6 +255,7 @@ list<U> map_function(const list<T> &list_to_map, const F &func) {
   return result;
 }
 
+// for_each implements std::for_each-like function.
 template <typename F, typename T>
 void for_each(const list<T> &list_to_iterate, const F &func) {
   // Traverse the list.
