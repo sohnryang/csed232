@@ -6,6 +6,6 @@
 
 class iclassic : public artist {
 public:
-  iclassic(int, int, std::vector<int>);
+  iclassic(int, int, const std::vector<int> &);
   char mapper(int, int);
 };
