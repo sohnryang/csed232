@@ -3,7 +3,7 @@
 #include <vector>
 
 class artist {
-private:
+protected:
   int width, height;
   std::vector<std::vector<int>> image;
 
