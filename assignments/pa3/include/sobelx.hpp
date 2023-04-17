@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
-
 #include "artist.hpp"
+
+#include <vector>
 
 class sobelx : public artist {
 public:
