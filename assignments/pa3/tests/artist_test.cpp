@@ -1,4 +1,5 @@
 #include "classic.hpp"
+#include "gradient.hpp"
 #include "iclassic.hpp"
 #include "sobelx.hpp"
 #include "sobely.hpp"
@@ -65,4 +66,20 @@ TEST(Artist, SobelY) {
   EXPECT_EQ(sy.mapper(0, 2), ' ');
   EXPECT_EQ(sy.mapper(1, 2), ' ');
   EXPECT_EQ(sy.mapper(2, 2), ' ');
+}
+
+TEST(Artist, Gradient) {
+  int width = 3, height = 3;
+  std::vector<int> sample_image = {width, height, 100, 160, 120, 100,
+                                   30,    100,    100, 100, 170};
+  gradient g(width, height, sample_image);
+  EXPECT_EQ(g.mapper(0, 0), '|');
+  EXPECT_EQ(g.mapper(1, 0), '-');
+  EXPECT_EQ(g.mapper(2, 0), ' ');
+  EXPECT_EQ(g.mapper(0, 1), '|');
+  EXPECT_EQ(g.mapper(1, 1), '+');
+  EXPECT_EQ(g.mapper(2, 1), '-');
+  EXPECT_EQ(g.mapper(0, 2), ' ');
+  EXPECT_EQ(g.mapper(1, 2), '|');
+  EXPECT_EQ(g.mapper(2, 2), ' ');
 }
