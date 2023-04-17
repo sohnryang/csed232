@@ -4,6 +4,9 @@
 
 #include <vector>
 
+void calculate_diff_y(const std::vector<std::vector<int>> &,
+                      std::vector<std::vector<int>> &);
+
 class sobely : public artist {
 private:
   std::vector<std::vector<int>> diff_y;
