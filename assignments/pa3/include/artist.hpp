@@ -5,5 +5,5 @@
 class artist {
 public:
   artist(int, int, const std::vector<int> &);
-  virtual char mapper(int, int);
+  virtual char mapper(int, int) = 0;
 };
