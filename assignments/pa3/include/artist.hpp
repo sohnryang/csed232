@@ -9,6 +9,6 @@ protected:
 
 public:
   artist(int, int, const std::vector<int> &);
-  int pixel_at(int, int);
+  int pixel_at(int, int) const;
   virtual char mapper(int, int) = 0;
 };

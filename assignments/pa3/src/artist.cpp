@@ -13,4 +13,4 @@ artist::artist(int width, int height, const std::vector<int> &image_data)
   }
 }
 
-int artist::pixel_at(int x, int y) { return image[y][x]; }
+int artist::pixel_at(int x, int y) const { return image[y][x]; }
