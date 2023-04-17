@@ -1,5 +1,6 @@
 #include "classic.hpp"
 #include "iclassic.hpp"
+#include "sobelx.hpp"
 
 #include <vector>
 
@@ -31,4 +32,20 @@ TEST(Artist, Iclassic) {
   EXPECT_EQ(ic.mapper(0, 1), '.');
   EXPECT_EQ(ic.pixel_at(1, 1), 37);
   EXPECT_EQ(ic.mapper(1, 1), '-');
+}
+
+TEST(Artist, SobelX) {
+  int width = 3, height = 3;
+  std::vector<int> sample_image = {width, height, 100, 160, 120, 100,
+                                   30,    100,    100, 100, 170};
+  sobelx sx(width, height, sample_image);
+  EXPECT_EQ(sx.mapper(0, 0), '|');
+  EXPECT_EQ(sx.mapper(1, 0), ' ');
+  EXPECT_EQ(sx.mapper(2, 0), ' ');
+  EXPECT_EQ(sx.mapper(0, 1), '|');
+  EXPECT_EQ(sx.mapper(1, 1), '|');
+  EXPECT_EQ(sx.mapper(2, 1), ' ');
+  EXPECT_EQ(sx.mapper(0, 2), ' ');
+  EXPECT_EQ(sx.mapper(1, 2), '|');
+  EXPECT_EQ(sx.mapper(2, 2), ' ');
 }
