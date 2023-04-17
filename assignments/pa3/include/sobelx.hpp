@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include <artist.hpp>
+#include "artist.hpp"
 
 class sobelx : public artist {
 public:

@@ -1,14 +1,14 @@
-#include <artist.hpp>
-#include <classic.hpp>
-#include <downsample.hpp>
-#include <drawer.hpp>
-#include <gradient.hpp>
-#include <iclassic.hpp>
-#include <parser.hpp>
-#include <scale.hpp>
-#include <sobelx.hpp>
-#include <sobely.hpp>
-#include <upsample.hpp>
+#include "artist.hpp"
+#include "classic.hpp"
+#include "downsample.hpp"
+#include "drawer.hpp"
+#include "gradient.hpp"
+#include "iclassic.hpp"
+#include "parser.hpp"
+#include "scale.hpp"
+#include "sobelx.hpp"
+#include "sobely.hpp"
+#include "upsample.hpp"
 
 #include <iostream>
 #include <string>
