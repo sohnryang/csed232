@@ -4,8 +4,7 @@
 
 #include <vector>
 
-void calculate_diff_x(const std::vector<std::vector<int>> &,
-                      std::vector<std::vector<int>> &);
+void calculate_diff_x(const artist *, std::vector<std::vector<int>> &);
 
 class sobelx : public artist {
 private:
