@@ -9,7 +9,7 @@
 #include <vector>
 
 TEST(Lexer, UsualInput) {
-  auto st = std::make_unique<std::stringstream>("42|abcd|1234| efgh|\n");
+  auto st = std::make_unique<std::stringstream>("42|abcd|1234| efgh|-128\n");
   lexer lex(std::move(st));
   EXPECT_EQ(lex.next_token(), token("42", token_kind::NUMBER));
   EXPECT_EQ(lex.next_token(), token("|", token_kind::SEPARATOR));
@@ -19,6 +19,7 @@ TEST(Lexer, UsualInput) {
   EXPECT_EQ(lex.next_token(), token("|", token_kind::SEPARATOR));
   EXPECT_EQ(lex.next_token(), token("efgh", token_kind::WORD));
   EXPECT_EQ(lex.next_token(), token("|", token_kind::SEPARATOR));
+  EXPECT_EQ(lex.next_token(), token("-128", token_kind::NUMBER));
   EXPECT_EQ(lex.next_token(), token("", token_kind::END));
 }
 
