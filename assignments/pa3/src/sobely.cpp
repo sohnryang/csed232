@@ -1,5 +1,7 @@
 #include "sobely.hpp"
 
+#include <cmath>
+
 void calculate_diff_y(const artist *art,
                       std::vector<std::vector<int>> &diff_y) {
   for (int y = 1; y < art->get_height(); y++) {

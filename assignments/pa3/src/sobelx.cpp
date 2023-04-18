@@ -1,5 +1,7 @@
 #include "sobelx.hpp"
 
+#include <cmath>
+
 void calculate_diff_x(const artist *art,
                       std::vector<std::vector<int>> &diff_x) {
   for (int y = 0; y < art->get_height(); y++) {
