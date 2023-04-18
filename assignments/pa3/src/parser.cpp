@@ -51,14 +51,13 @@ parser::load_config(std::unique_ptr<std::istream> input_stream) {
     if (token_count % 2 == 1 && last_token.second != token_kind::SEPARATOR)
       throw std::logic_error("expected SEPARATOR");
     else if (token_count % 2 == 0) {
-      if (last_token.second != token_kind::WORD)
+      if (last_token.second != token_kind::WORD &&
+          last_token.second != token_kind::NUMBER)
         throw std::logic_error("expected WORD");
       res.push_back(last_token.first);
     }
     token_count++;
   }
-  if (res.size() != 2)
-    throw std::logic_error("invalid config file");
   return res;
 }
 
