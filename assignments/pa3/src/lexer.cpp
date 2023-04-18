@@ -14,7 +14,7 @@ token lexer::next_token() {
     last_char = input_stream->get();
     return {"|", token_kind::SEPARATOR};
   }
-  if (std::isdigit(last_char)) {
+  if (std::isdigit(last_char) || last_char == '-' || last_char == '+') {
     std::string num_str;
     do {
       num_str += last_char;
