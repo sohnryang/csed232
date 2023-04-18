@@ -8,7 +8,7 @@ set(gtest_force_shared_crt
     CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_executable(pa3_tests artist_test.cpp)
+add_executable(pa3_tests artist_test.cpp drawer_test.cpp)
 target_link_libraries(
   pa3_tests
   PRIVATE pa3lib
