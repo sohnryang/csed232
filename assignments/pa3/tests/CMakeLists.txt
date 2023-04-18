@@ -20,3 +20,11 @@ target_link_options(pa3_tests PRIVATE
                     "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,leak>")
 include(GoogleTest)
 gtest_discover_tests(pa3_tests)
+
+add_executable(pa3_lexer_fuzz lexer_fuzz.cpp)
+target_link_libraries(pa3_lexer_fuzz PRIVATE pa3lib)
+target_include_directories(pa3_lexer_fuzz PRIVATE "${PA3_ROOT}/include")
+target_compile_options(
+  pa3_lexer_fuzz PRIVATE "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,fuzzer>")
+target_link_options(pa3_lexer_fuzz PRIVATE
+                    "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,fuzzer>")
