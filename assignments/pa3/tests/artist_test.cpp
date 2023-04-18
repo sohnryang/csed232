@@ -11,7 +11,7 @@
 
 TEST(Artist, Classic) {
   int width = 2, height = 2;
-  std::vector<int> sample_image = {width, height, 2, 18, 18, 37};
+  std::vector<int> sample_image = {2, 18, 18, 37};
   classic c(width, height, sample_image);
   EXPECT_EQ(c.pixel_at(0, 0), 2);
   EXPECT_EQ(c.mapper(0, 0), '@');
@@ -25,7 +25,7 @@ TEST(Artist, Classic) {
 
 TEST(Artist, Iclassic) {
   int width = 2, height = 2;
-  std::vector<int> sample_image = {width, height, 2, 18, 18, 37};
+  std::vector<int> sample_image = {2, 18, 18, 37};
   iclassic ic(width, height, sample_image);
   EXPECT_EQ(ic.pixel_at(0, 0), 2);
   EXPECT_EQ(ic.mapper(0, 0), ' ');
@@ -39,8 +39,7 @@ TEST(Artist, Iclassic) {
 
 TEST(Artist, SobelX) {
   int width = 3, height = 3;
-  std::vector<int> sample_image = {width, height, 100, 160, 120, 100,
-                                   30,    100,    100, 100, 170};
+  std::vector<int> sample_image = {100, 160, 120, 100, 30, 100, 100, 100, 170};
   sobelx sx(width, height, sample_image);
   EXPECT_EQ(sx.mapper(0, 0), '|');
   EXPECT_EQ(sx.mapper(1, 0), ' ');
@@ -55,8 +54,7 @@ TEST(Artist, SobelX) {
 
 TEST(Artist, SobelY) {
   int width = 3, height = 3;
-  std::vector<int> sample_image = {width, height, 100, 160, 120, 100,
-                                   30,    100,    100, 100, 170};
+  std::vector<int> sample_image = {100, 160, 120, 100, 30, 100, 100, 100, 170};
   sobely sy(width, height, sample_image);
   EXPECT_EQ(sy.mapper(0, 0), ' ');
   EXPECT_EQ(sy.mapper(1, 0), '-');
@@ -71,8 +69,7 @@ TEST(Artist, SobelY) {
 
 TEST(Artist, Gradient) {
   int width = 3, height = 3;
-  std::vector<int> sample_image = {width, height, 100, 160, 120, 100,
-                                   30,    100,    100, 100, 170};
+  std::vector<int> sample_image = {100, 160, 120, 100, 30, 100, 100, 100, 170};
   gradient g(width, height, sample_image);
   EXPECT_EQ(g.mapper(0, 0), '|');
   EXPECT_EQ(g.mapper(1, 0), '-');
