@@ -2,6 +2,7 @@
 #include "downsample.hpp"
 #include "drawer.hpp"
 #include "gradient.hpp"
+#include "upsample.hpp"
 
 #include <vector>
 
@@ -33,5 +34,21 @@ TEST(Drawer, Downsample) {
   downsample ds(&c);
   EXPECT_EQ(ds.draw(), R"(@%
 &&
+)");
+}
+
+TEST(Drawer, Upsample) {
+  int width = 2, height = 2;
+  std::vector<int> sample_image = {width, height, 2, 37, 18, 18};
+  classic c(width, height, sample_image);
+  drawer d(&c);
+  EXPECT_EQ(d.draw(), R"(@%
+&&
+)");
+  upsample u(&c);
+  EXPECT_EQ(u.draw(), R"(@@%%
+@@%%
+&&&&
+&&&&
 )");
 }
