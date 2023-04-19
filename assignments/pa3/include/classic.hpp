@@ -8,6 +8,6 @@
 class classic : public artist {
 public:
   static const std::string pattern;
-  classic(int, int, const std::vector<int> &);
-  char mapper(int, int);
+  classic(int width, int height, const std::vector<int> &image_data);
+  char mapper(int x, int y);
 };

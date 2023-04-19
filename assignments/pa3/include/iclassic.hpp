@@ -8,6 +8,6 @@
 class iclassic : public artist {
 public:
   static const std::string pattern;
-  iclassic(int, int, const std::vector<int> &);
-  char mapper(int, int);
+  iclassic(int width, int height, const std::vector<int> &image_data);
+  char mapper(int x, int y);
 };

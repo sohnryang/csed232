@@ -10,6 +10,6 @@ private:
   int repeat_x, step_x, repeat_y, step_y;
 
 public:
-  scale(artist *, int, int);
+  scale(artist *art, int scale_x, int scale_y);
   std::string draw();
 };

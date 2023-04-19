@@ -9,6 +9,6 @@ private:
   std::vector<std::vector<int>> diff_x, diff_y;
 
 public:
-  gradient(int, int, const std::vector<int> &);
-  char mapper(int, int);
+  gradient(int width, int height, const std::vector<int> &image_data);
+  char mapper(int x, int y);
 };

@@ -8,9 +8,9 @@ private:
   std::vector<std::vector<int>> image;
 
 public:
-  artist(int, int, const std::vector<int> &);
+  artist(int width, int height, const std::vector<int> &image_data);
   int get_width() const;
   int get_height() const;
-  int pixel_at(int, int) const;
-  virtual char mapper(int, int) = 0;
+  int pixel_at(int x, int y) const;
+  virtual char mapper(int x, int y) = 0;
 };

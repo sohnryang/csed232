@@ -7,9 +7,10 @@
 
 class parser {
 public:
-  std::vector<int> load_image(const char *);
-  std::vector<int> load_image(std::unique_ptr<std::istream>);
-  std::vector<std::string> load_config(const char *);
-  std::vector<std::string> load_config(std::unique_ptr<std::istream>);
-  void write_result(const char *, const std::string &);
+  std::vector<int> load_image(const char *image_path);
+  std::vector<int> load_image(std::unique_ptr<std::istream> input_stream);
+  std::vector<std::string> load_config(const char *config_path);
+  std::vector<std::string>
+  load_config(std::unique_ptr<std::istream> input_stream);
+  void write_result(const char *output_path, const std::string &ascii_art);
 };

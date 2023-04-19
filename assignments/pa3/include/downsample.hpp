@@ -6,6 +6,6 @@
 
 class downsample : public drawer {
 public:
-  downsample(artist *);
+  downsample(artist *art);
   std::string draw();
 };

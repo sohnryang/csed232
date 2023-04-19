@@ -12,6 +12,6 @@ protected:
   artist *get_artist() const;
 
 public:
-  drawer(artist *);
+  drawer(artist *art);
   virtual std::string draw();
 };
