@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-void calculate_diff_y(const artist *art,
-                      std::vector<std::vector<int>> &diff_y) {
+void sobely::calculate_diff_y(const artist *art,
+                              std::vector<std::vector<int>> &diff_y) {
   for (int y = 1; y < art->get_height(); y++) {
     diff_y.push_back({});
     for (int x = 0; x < art->get_width(); x++)

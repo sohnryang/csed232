@@ -4,8 +4,8 @@
 
 gradient::gradient(int width, int height, const std::vector<int> &image_data)
     : artist(width, height, image_data) {
-  calculate_diff_x(this, diff_x);
-  calculate_diff_y(this, diff_y);
+  sobelx::calculate_diff_x(this, diff_x);
+  sobely::calculate_diff_y(this, diff_y);
 }
 
 char gradient::mapper(int x, int y) {
