@@ -27,3 +27,17 @@ TEST(Parser, LoadConfig) {
   std::vector<std::string> config_data = p.load_config(std::move(st));
   EXPECT_EQ(config_data, std::vector<std::string>({"iclassic", "upsample"}));
 }
+
+TEST(Parser, HandleTrailingWhitespace) {
+  auto st = std::make_unique<std::stringstream>("iclassic|upsample \t\n");
+  parser p;
+  std::vector<std::string> config_data = p.load_config(std::move(st));
+  EXPECT_EQ(config_data, std::vector<std::string>({"iclassic", "upsample"}));
+}
+
+TEST(Parser, HandleLeadingWhitespace) {
+  auto st = std::make_unique<std::stringstream>(" iclassic|upsample");
+  parser p;
+  std::vector<std::string> config_data = p.load_config(std::move(st));
+  EXPECT_EQ(config_data, std::vector<std::string>({"iclassic", "upsample"}));
+}
