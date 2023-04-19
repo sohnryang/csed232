@@ -8,11 +8,17 @@
 std::vector<std::string>
 parser::read_psv(std::unique_ptr<std::istream> input_stream) {
   std::vector<std::string> res;
+  std::string whitespaces = " \t\v\n\r\f";
   while (!input_stream->eof()) {
     std::string token; // string variable to hold token
     // Read a line of input from input_stream and store it in token using '|' as
     // delimiter.
     std::getline(*input_stream, token, '|');
+
+    // Trim whitespaces.
+    token.erase(token.find_last_not_of(whitespaces) + 1);
+    token.erase(0, token.find_first_not_of(whitespaces));
+
     res.push_back(token); // append token to res
   }
   return res; // return the vector of strings
