@@ -1,6 +1,5 @@
 add_library(
   pa3lib
-  lexer.cpp
   parser.cpp
   artist.cpp
   classic.cpp

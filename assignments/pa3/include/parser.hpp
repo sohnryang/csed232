@@ -7,6 +7,7 @@
 
 class parser {
 public:
+  std::vector<std::string> read_psv(std::unique_ptr<std::istream> input_stream);
   std::vector<int> load_image(const char *image_path);
   std::vector<int> load_image(std::unique_ptr<std::istream> input_stream);
   std::vector<std::string> load_config(const char *config_path);
