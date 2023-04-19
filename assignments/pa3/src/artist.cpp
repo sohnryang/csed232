@@ -5,9 +5,13 @@
 
 artist::artist(int width, int height, const std::vector<int> &image_data)
     : width(width), height(height) {
-  image.assign(height, {});
-  for (int y = 0; y < height; y++) {
+  image.assign(height, {}); // assign empty rows to image vector
+
+  for (int y = 0; y < height; y++) { // copy image_data into image vector
+    // calculate the starting index of image_data for copying
     int copy_start = y * width;
+
+    // copy 'width' number of elements from image_data to image[y]
     std::copy_n(image_data.begin() + copy_start, width,
                 std::back_inserter(image[y]));
   }

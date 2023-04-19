@@ -6,12 +6,16 @@
 
 class drawer {
 private:
-  artist *art;
+  artist *art; // pointer to artist.
 
 protected:
+  // Getter for artist pointer.
   artist *get_artist() const;
 
 public:
+  // Constructor for `drawer`.
   drawer(artist *art);
+
+  // Create ascii art string using artist.
   virtual std::string draw();
 };
