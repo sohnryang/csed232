@@ -1,4 +1,5 @@
 #include "artist.hpp"
+#include "binary.hpp"
 #include "classic.hpp"
 #include "downsample.hpp"
 #include "drawer.hpp"
@@ -53,6 +54,8 @@ int main(int argc, char *argv[]) {
     style = new sobely(width, height, vals);
   } else if (style_target == "gradient") {
     style = new gradient(width, height, vals);
+  } else if (style_target == "binary") {
+    style = new binary(width, height, vals);
   } else {
     throw;
   }

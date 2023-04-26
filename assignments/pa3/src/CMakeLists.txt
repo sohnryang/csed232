@@ -7,6 +7,7 @@ add_library(
   sobelx.cpp
   sobely.cpp
   gradient.cpp
+  binary.cpp
   drawer.cpp
   downsample.cpp
   upsample.cpp
