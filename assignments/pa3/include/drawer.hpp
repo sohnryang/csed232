@@ -16,6 +16,9 @@ public:
   // Constructor for `drawer`.
   drawer(artist *art);
 
+  // Destructor for `artist`.
+  virtual ~drawer();
+
   // Create ascii art string using artist.
   virtual std::string draw();
 };

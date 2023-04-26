@@ -14,6 +14,9 @@ public:
   // Constructor of `artist`.
   artist(int width, int height, const std::vector<int> &image_data);
 
+  // Destructor of `artist`.
+  virtual ~artist();
+
   // Get the width of the image.
   int get_width() const;
 

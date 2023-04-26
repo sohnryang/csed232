@@ -17,6 +17,8 @@ artist::artist(int width, int height, const std::vector<int> &image_data)
   }
 }
 
+artist::~artist() {}
+
 int artist::get_width() const { return width; }
 
 int artist::get_height() const { return height; }

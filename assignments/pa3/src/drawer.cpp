@@ -3,6 +3,8 @@
 
 drawer::drawer(artist *art) : art(art) {}
 
+drawer::~drawer() { delete art; }
+
 artist *drawer::get_artist() const { return art; }
 
 std::string drawer::draw() {
