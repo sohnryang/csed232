@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <vector>
 
 artist::artist(int width, int height, const std::vector<int> &image_data)
     : width(width), height(height) {

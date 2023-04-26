@@ -1,6 +1,8 @@
 #include "sobely.hpp"
+#include "artist.hpp"
 
 #include <cmath>
+#include <vector>
 
 void sobely::calculate_diff_y(const artist *art,
                               std::vector<std::vector<int>> &diff_y) {

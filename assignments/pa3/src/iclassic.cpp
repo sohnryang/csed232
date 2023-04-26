@@ -1,6 +1,10 @@
 #include "iclassic.hpp"
 #include "classic.hpp"
 
+#include <algorithm>
+#include <string>
+#include <vector>
+
 // Initialize pattern for `iclassic` using pattern from `classic`.
 const std::string iclassic::pattern(classic::pattern.rbegin(),
                                     classic::pattern.rend());

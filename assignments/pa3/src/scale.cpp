@@ -1,6 +1,8 @@
 #include "scale.hpp"
 #include "artist.hpp"
 
+#include <string>
+
 scale::scale(artist *art, int scale_x, int scale_y) : drawer(art) {
   if (scale_y < 0) { // if the y-scaling factor is negative
     repeat_y = 1;

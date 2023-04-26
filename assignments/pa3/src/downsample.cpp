@@ -1,4 +1,7 @@
 #include "downsample.hpp"
+#include "artist.hpp"
+
+#include <string>
 
 // Since downsample is a special case of scale, we can use that object.
 downsample::downsample(artist *art) : drawer(art) {}

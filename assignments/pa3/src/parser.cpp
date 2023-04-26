@@ -2,8 +2,12 @@
 
 #include <algorithm>
 #include <fstream>
+#include <istream>
 #include <iterator>
+#include <memory>
 #include <stdexcept>
+#include <string>
+#include <vector>
 
 std::vector<std::string>
 parser::read_psv(std::unique_ptr<std::istream> input_stream) {

@@ -1,6 +1,8 @@
 #include "classic.hpp"
 
 #include <algorithm>
+#include <string>
+#include <vector>
 
 const std::string classic::pattern = "@&%WXAHOT*^+-. ";
 

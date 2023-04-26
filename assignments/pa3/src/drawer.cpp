@@ -1,6 +1,8 @@
 #include "drawer.hpp"
 #include "artist.hpp"
 
+#include <string>
+
 drawer::drawer(artist *art) : art(art) {}
 
 drawer::~drawer() { delete art; }

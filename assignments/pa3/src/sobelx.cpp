@@ -1,6 +1,8 @@
 #include "sobelx.hpp"
+#include "artist.hpp"
 
 #include <cmath>
+#include <vector>
 
 void sobelx::calculate_diff_x(const artist *art,
                               std::vector<std::vector<int>> &diff_x) {

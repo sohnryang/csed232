@@ -1,6 +1,8 @@
 #include "upsample.hpp"
 #include "artist.hpp"
 
+#include <string>
+
 // Since upsample is a special case of scale, we can use that object.
 upsample::upsample(artist *art) : drawer(art) {}
 
