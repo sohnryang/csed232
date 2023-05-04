@@ -1,0 +1,5 @@
+add_library(pa4lib Image.cc)
+target_include_directories(pa4lib PRIVATE "${PA4_ROOT}/include")
+add_executable(pa4_sptr_test SharedPtr_test.cc)
+target_include_directories(pa4_sptr_test PRIVATE "${PA4_ROOT}/include")
+target_link_libraries(pa4_sptr_test pa4lib)
