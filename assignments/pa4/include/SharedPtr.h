@@ -30,7 +30,7 @@ public:
   ////////////////////////////////////////////
   // Constructors & destructor
   ////////////////////////////////////////////
-  SharedPtr(ObjectType *ptr) : m_object(ptr) {
+  explicit SharedPtr(ObjectType *ptr) : m_object(ptr) {
     if (m_object == nullptr)
       m_ref_counter = nullptr;
     else
