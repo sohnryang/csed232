@@ -74,8 +74,10 @@ public:
   // operator->
   // operator*
 
-  ObjectType &operator*() const { return *m_object; }
-  ObjectType *operator->() const { return m_object; }
+  ObjectType &operator*() { return *m_object; }
+  const ObjectType &operator*() const { return *m_object; }
+  ObjectType *operator->() { return m_object; }
+  const ObjectType *operator->() const { return m_object; }
 
   // ======= ADD CODE HERE IF NEEDED =========
 
