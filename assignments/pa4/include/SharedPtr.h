@@ -99,7 +99,9 @@ public:
   // Type casting operators
   ////////////////////////////////////////////
   // operator ObjectType const*() const
-  operator ObjectType const *() const { return (ObjectType const *)m_object; }
+  operator ObjectType const *() const {
+    return static_cast<ObjectType const *>(m_object);
+  }
   // operator ObjectType*()
   operator ObjectType *() const { return m_object; }
 
