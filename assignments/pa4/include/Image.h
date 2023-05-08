@@ -47,18 +47,36 @@ public:
         m_buff(new PixelType[width * height]) {}
 
   // ======= ADD CODE HERE IF NEEDED =========
+  Image() {}
+  Image(int width, int height, PixelType pixel)
+      : m_width(width), m_height(height),
+        m_buff(new PixelType[width * height]) {
+    for (int y = 0; y < height; y++)
+      for (int x = 0; x < width; x++)
+        m_buff[y * width + x] = pixel;
+  }
 
   ////////////////////////////////////////////
   // assignment operator
   ////////////////////////////////////////////
 
   // ======= ADD CODE HERE IF NEEDED =========
+  Image &operator=(const Image &that) {
+    if (this == &that)
+      return *this;
+    m_width = that.m_width;
+    m_height = that.m_height;
+    m_buff = that.m_buff;
+    return *this;
+  }
 
   ////////////////////////////////////////////
   // element access operators
   ////////////////////////////////////////////
   PixelType *operator[](int y) { return &m_buff[y * m_width]; }
-  const PixelType *operator[](int y) const { return &m_buff[y * m_width]; }
+  const PixelType *operator[](int y) const {
+    return static_cast<const PixelType *>(&m_buff[y * m_width]);
+  }
 
   ////////////////////////////////////////////
   // other methods
