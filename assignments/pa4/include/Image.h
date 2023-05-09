@@ -49,17 +49,20 @@ public:
 	////////////////////////////////////////////
 	
 	// ======= ADD CODE HERE IF NEEDED =========
+	Image() : m_width(0), m_height(0), m_buff(nullptr) {}
 	Image(int width, int height)
 	: m_width(width), m_height(height),
 		m_buff(new PixelType[width * height]) {}
-	Image() {}
-	Image(int width, int height, PixelType pixel)
+	Image(int width, int height, const PixelType &pixel)
 	: m_width(width), m_height(height),
 		m_buff(new PixelType[width * height]) {
 		for (int y = 0; y < height; y++)
 			for (int x = 0; x < width; x++)
 				m_buff[y * width + x] = pixel;
 	}
+	Image(const Image<PixelType> &that)
+	: m_width(that.m_width), m_height(that.m_height),
+		m_buff(that.m_buff) {}
 
 	////////////////////////////////////////////
 	// assignment operator
