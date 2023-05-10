@@ -61,8 +61,14 @@ public:
 				m_buff[y * width + x] = pixel;
 	}
 	Image(const Image<PixelType> &that)
-	: m_width(that.m_width), m_height(that.m_height),
-		m_buff(that.m_buff) {}
+	: m_width(that.m_width), m_height(that.m_height) {
+		int buf_size = m_width * m_height;
+		if (buf_size == 0)
+			return;
+		m_buff = SharedArray<PixelType>(new PixelType[buf_size]);
+		for (int i = 0; i < buf_size; i++)
+			m_buff[i] = that.m_buff[i];
+	}
 
 	////////////////////////////////////////////
 	// assignment operator
@@ -74,7 +80,12 @@ public:
 			return *this;
 		m_width = that.m_width;
 		m_height = that.m_height;
-		m_buff = that.m_buff;
+		int buf_size = m_width * m_height;
+		if (buf_size == 0)
+			return *this;
+		m_buff = SharedArray<PixelType>(new PixelType[buf_size]);
+		for (int i = 0; i < buf_size; i++)
+			m_buff[i] = that.m_buff[i];
 		return *this;
 	}
 
