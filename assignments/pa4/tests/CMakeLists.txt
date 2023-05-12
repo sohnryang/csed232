@@ -6,7 +6,7 @@ target_compile_options(
 target_link_options(sptr_fuzz PRIVATE
                     "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,fuzzer>")
 
-add_executable(pa4_tests sptr_test.cc)
+add_executable(pa4_tests sptr_test.cc image_tests.cc)
 target_link_libraries(
   pa4_tests
   PRIVATE pa4lib
