@@ -30,16 +30,16 @@ TEST(Image, Convert) {
 }
 
 TEST(SliceRange, Init) {
-  Image<nullptr_t>::SliceRange s1;
+  Image<std::nullptr_t>::SliceRange s1;
   EXPECT_EQ(s1.whole, true);
 
-  Image<nullptr_t>::SliceRange s2(0, 42);
+  Image<std::nullptr_t>::SliceRange s2(0, 42);
   EXPECT_EQ(s2.whole, false);
   EXPECT_EQ(s2.start, 0);
   EXPECT_EQ(s2.stop, 42);
   EXPECT_EQ(s2.step, 1);
 
-  Image<nullptr_t>::SliceRange s3(0, 42, 2);
+  Image<std::nullptr_t>::SliceRange s3(0, 42, 2);
   EXPECT_EQ(s3.whole, false);
   EXPECT_EQ(s3.start, 0);
   EXPECT_EQ(s3.stop, 42);
@@ -47,22 +47,22 @@ TEST(SliceRange, Init) {
 }
 
 TEST(SliceRange, Count) {
-  Image<nullptr_t>::SliceRange s1;
+  Image<std::nullptr_t>::SliceRange s1;
   EXPECT_EQ(s1.count(), -1);
 
-  Image<nullptr_t>::SliceRange s2(0, 42);
+  Image<std::nullptr_t>::SliceRange s2(0, 42);
   EXPECT_EQ(s2.count(), 42);
 
-  Image<nullptr_t>::SliceRange s3(0, 42, 10);
+  Image<std::nullptr_t>::SliceRange s3(0, 42, 10);
   EXPECT_EQ(s3.count(), 5);
 
-  Image<nullptr_t>::SliceRange s4(42, 0);
+  Image<std::nullptr_t>::SliceRange s4(42, 0);
   EXPECT_EQ(s4.count(), 0);
 
-  Image<nullptr_t>::SliceRange s5(42, 0, -1);
+  Image<std::nullptr_t>::SliceRange s5(42, 0, -1);
   EXPECT_EQ(s5.count(), 42);
 
-  Image<nullptr_t>::SliceRange s6(42, 0, -10);
+  Image<std::nullptr_t>::SliceRange s6(42, 0, -10);
   EXPECT_EQ(s6.count(), 5);
 }
 
