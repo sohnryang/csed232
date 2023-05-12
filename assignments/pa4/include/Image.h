@@ -105,6 +105,62 @@ public:
 	// ======= ADD CODE HERE IF NEEDED =========
 	int width() const { return m_width; }
 	int height() const { return m_height; }
+
+	template<typename NewPixelType, typename ConvFunc>
+	Image<NewPixelType> convert(const ConvFunc& func) const {
+		Image<NewPixelType> converted(m_width, m_height);
+		for (int y = 0; y < m_height; y++)
+			for (int x = 0; x < m_width; x++)
+				converted[y][x] = func(m_buff[y * m_width + x]);
+		return converted;
+	}
+
+	struct SliceRange {
+		int start, stop, step;
+		bool whole;
+
+		SliceRange()
+		: start(0), step(1), whole(true) {}
+		SliceRange(int start, int stop, int step)
+		: start(start), stop(stop), step(step), whole(false) {}
+		SliceRange(int start, int stop)
+		: SliceRange(start, stop, 1) {}
+
+		int count() const {
+			if (whole)
+				return -1;
+			int count, len;
+			if (step > 0)
+				len = stop - start;
+			else
+				len = start - stop;
+			if (len <= 0)
+				return 0;
+			if (step > 0)
+				count = len / step + (len % step != 0);
+			else
+				count = len / -step + (len % -step != 0);
+			return count;
+		}
+	};
+
+	Image<PixelType> slice(const SliceRange &range_x, const SliceRange &range_y) const {
+		int x_count, y_count;
+		if (range_x.whole)
+			x_count = m_width;
+		else
+			x_count = range_x.count();
+		if (range_y.whole)
+			y_count = m_height;
+		else
+			y_count = range_y.count();
+		Image<PixelType> sliced(x_count, y_count);
+		for (int y = 0; y < y_count; y++)
+			for (int x = 0; x < x_count; x++)
+				sliced[y][x] = m_buff[(range_y.start + range_y.step * y) * m_width
+					+ (range_x.start + range_x.step * x)];
+		return sliced;
+	}
 };
 
 // ======= ADD CODE HERE IF NEEDED =========
