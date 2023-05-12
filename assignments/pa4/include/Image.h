@@ -99,10 +99,10 @@ public:
 	// other methods
 	////////////////////////////////////////////
 	//   - width(), height()
-	int width() const { return m_width; }
-	int height() const { return m_height; }
 	
 	// ======= ADD CODE HERE IF NEEDED =========
+	int width() const { return m_width; }
+	int height() const { return m_height; }
 };
 
 // ======= ADD CODE HERE IF NEEDED =========
