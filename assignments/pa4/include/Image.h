@@ -40,7 +40,11 @@ class Image
 {
 private:
 	// ======= ADD CODE HERE IF NEEDED =========
+
+	// Shared array for pixel data.
 	SharedArray<PixelType> m_buff;
+
+	// Image width and height.
 	int m_width, m_height;
 	
 public:
@@ -49,22 +53,30 @@ public:
 	////////////////////////////////////////////
 	
 	// ======= ADD CODE HERE IF NEEDED =========
+	// Default constructor.
 	Image() : m_width(0), m_height(0), m_buff(nullptr) {}
-	Image(int width, int height)
-	: m_width(width), m_height(height) {
-		int buf_size = width * height;
-		if (buf_size == 0) {
+
+	// Constructor with image size.
+	Image(int _width, int _height)
+	: m_width(_width), m_height(_height) {
+		int buf_size = _width * _height;
+		if (buf_size == 0) { // check if size is zero
 			m_buff = SharedArray<PixelType>(nullptr);
 			return;
 		}
+		// Allocate array
 		m_buff = SharedArray<PixelType>(new PixelType[buf_size]);
 	}
+
+	// Constructor with image size and single pixel.
 	Image(int width, int height, const PixelType &pixel)
 	: Image(width, height) {
 		for (int y = 0; y < height; y++)
 			for (int x = 0; x < width; x++)
 				m_buff[y * width + x] = pixel;
 	}
+
+	// Copy constructor.
 	Image(const Image<PixelType> &that)
 	: Image(that.width(), that.height()) {
 		int buf_size = m_width * m_height;
@@ -77,24 +89,34 @@ public:
 	////////////////////////////////////////////
 	
 	// ======= ADD CODE HERE IF NEEDED =========
+	// Assignment operator overload
 	Image &operator=(const Image &that) {
-		if (this == &that)
+		if (this == &that) // check self-assignment
 			return *this;
+
+		// Copy width and height.
 		m_width = that.m_width;
 		m_height = that.m_height;
+
 		int buf_size = m_width * m_height;
-		if (buf_size == 0)
+		if (buf_size == 0) // check if size is zero
 			return *this;
+
+		// Allocate array.
 		m_buff = SharedArray<PixelType>(new PixelType[buf_size]);
 		for (int i = 0; i < buf_size; i++)
-			m_buff[i] = that.m_buff[i];
+			m_buff[i] = that.m_buff[i]; // copy array
 		return *this;
 	}
 
 	////////////////////////////////////////////
 	// element access operators
 	////////////////////////////////////////////
+
+	// Index operator
 	PixelType* operator[](int y) { return &m_buff[y * m_width]; }
+
+	// Index operator, const version
 	const PixelType* operator[](int y) const { return &m_buff[y * m_width]; }
 
 	////////////////////////////////////////////
@@ -103,43 +125,59 @@ public:
 	//   - width(), height()
 	
 	// ======= ADD CODE HERE IF NEEDED =========
+
+	// Getter for width
 	int width() const { return m_width; }
+
+	// Getter for height
 	int height() const { return m_height; }
 
+	// Convert pixel type.
 	template<typename NewPixelType, typename ConvFunc>
 	Image<NewPixelType> convert(const ConvFunc& func) const {
 		Image<NewPixelType> converted(m_width, m_height);
+		// Iterate over all pixels.
 		for (int y = 0; y < m_height; y++)
 			for (int x = 0; x < m_width; x++)
-				converted[y][x] = func(m_buff[y * m_width + x]);
+				converted[y][x] = func(m_buff[y * m_width + x]); // apply func
 		return converted;
 	}
 
+	// Inner class for slice range.
 	struct SliceRange {
+		// Range indicies, analogue to python A[start:stop:step] syntax.
 		int start, stop, step;
+
+		// Flag indicating whether the range spans the whole array, analogue to A[:] in python.
 		bool whole;
 
+		// Default constructor.
 		SliceRange()
 		: start(0), step(1), whole(true) {}
+
+		// Constructor with start, stop and step.
 		SliceRange(int start, int stop, int step)
 		: start(start), stop(stop), step(step), whole(false) {}
+
+		// Constructor with start and stop.
 		SliceRange(int start, int stop)
 		: SliceRange(start, stop, 1) {}
 
+		// Count indicies spanned by range.
 		int count() const {
-			if (whole)
+			if (whole) // if range spans the whole array
 				return -1;
 			int count, len;
-			if (step > 0)
+			if (step > 0) // if counting in natural order
 				len = stop - start;
-			else
+			else // if counting in backwards
 				len = start - stop;
-			if (len <= 0)
+			if (len <= 0) // check if range spans nothing
 				return 0;
 			if (step > 0)
-				count = len / step + (len % step != 0);
+				count = len / step + (len % step != 0); // ceil operation
 			else
-				count = len / -step + (len % -step != 0);
+				count = len / -step + (len % -step != 0); // ceil operation
 			return count;
 		}
 	};
@@ -147,18 +185,18 @@ public:
 	Image<PixelType> slice(const SliceRange &range_x, const SliceRange &range_y) const {
 		int x_count, y_count;
 		if (range_x.whole)
-			x_count = m_width;
+			x_count = m_width; // the range is whole array, so width is the same as original
 		else
 			x_count = range_x.count();
 		if (range_y.whole)
-			y_count = m_height;
+			y_count = m_height; // the range is whole array, so height is the same as original
 		else
 			y_count = range_y.count();
 		Image<PixelType> sliced(x_count, y_count);
 		for (int y = 0; y < y_count; y++)
 			for (int x = 0; x < x_count; x++)
 				sliced[y][x] = m_buff[(range_y.start + range_y.step * y) * m_width
-					+ (range_x.start + range_x.step * x)];
+					+ (range_x.start + range_x.step * x)]; // copy pixel
 		return sliced;
 	}
 };
