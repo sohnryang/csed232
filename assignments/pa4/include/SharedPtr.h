@@ -38,6 +38,9 @@ public:
 	
 	// ======= ADD CODE HERE IF NEEDED =========
 
+	// Default constructor. Same as SharedPtr(nullptr).
+	SharedPtr() : SharedPtr(nullptr) {}
+
 	// Constructor with raw pointer.
 	explicit SharedPtr(ObjectType *ptr) : m_object(ptr) {
 		if (m_object == nullptr) // check if we are pointing to null pointer
@@ -52,9 +55,6 @@ public:
 		if (m_ref_counter != nullptr)
 			*m_ref_counter += 1; // increment refcount
 	}
-
-	// Default constructor. Same as SharedPtr(nullptr).
-	SharedPtr() : SharedPtr(nullptr) {}
 
 	////////////////////////////////////////////
 	// Assignment operator
@@ -108,11 +108,11 @@ public:
 	
 	// ======= ADD CODE HERE IF NEEDED =========
 
-	// Index operator.
-	const ObjectType &operator[](int index) const { return m_object[index]; }
-
 	// Index operator, const version.
 	ObjectType &operator[](int index) { return m_object[index]; }
+
+	// Index operator.
+	const ObjectType &operator[](int index) const { return m_object[index]; }
 
 	////////////////////////////////////////////
 	// Array element access operators
@@ -127,13 +127,13 @@ public:
 	
 	// ======= ADD CODE HERE IF NEEDED =========
 
+	// Typecast operator.
+	operator ObjectType *() const { return m_object; }
+
 	// Typecast operator, const version.
 	operator ObjectType const *() const {
 		return static_cast<ObjectType const *>(m_object);
 	}
-
-	// Typecast operator.
-	operator ObjectType *() const { return m_object; }
 
 	// Destructor.
 	~SharedPtr() {
