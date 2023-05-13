@@ -112,11 +112,7 @@ public:
 	////////////////////////////////////////////
 	// element access operators
 	////////////////////////////////////////////
-
-	// Index operator
 	PixelType* operator[](int y) { return &m_buff[y * m_width]; }
-
-	// Index operator, const version
 	const PixelType* operator[](int y) const { return &m_buff[y * m_width]; }
 
 	////////////////////////////////////////////
