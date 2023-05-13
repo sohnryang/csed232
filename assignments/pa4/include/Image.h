@@ -45,7 +45,7 @@ private:
 	SharedArray<PixelType> m_buff;
 
 	// Image width and height.
-	int m_width, m_height;
+	size_t m_width, m_height;
 	
 public:
 	////////////////////////////////////////////
@@ -57,7 +57,7 @@ public:
 	Image() : m_width(0), m_height(0), m_buff(nullptr) {}
 
 	// Constructor with image size.
-	Image(int _width, int _height)
+	Image(size_t _width, size_t _height)
 	: m_width(_width), m_height(_height) {
 		int buf_size = _width * _height;
 		if (buf_size == 0) { // check if size is zero
@@ -69,19 +69,19 @@ public:
 	}
 
 	// Constructor with image size and single pixel.
-	Image(int width, int height, const PixelType &pixel)
-	: Image(width, height) {
-		for (int y = 0; y < height; y++)
-			for (int x = 0; x < width; x++)
-				m_buff[y * width + x] = pixel;
+	Image(size_t _width, size_t _height, const PixelType &val)
+	: Image(_width, _height) {
+		for (int y = 0; y < _height; y++)
+			for (int x = 0; x < _width; x++)
+				m_buff[y * _width + x] = val;
 	}
 
 	// Copy constructor.
-	Image(const Image<PixelType> &that)
-	: Image(that.width(), that.height()) {
+	Image(const Image<PixelType> &img)
+	: Image(img.width(), img.height()) {
 		int buf_size = m_width * m_height;
 		for (int i = 0; i < buf_size; i++)
-			m_buff[i] = that.m_buff[i];
+			m_buff[i] = img.m_buff[i];
 	}
 
 	////////////////////////////////////////////
@@ -127,10 +127,10 @@ public:
 	// ======= ADD CODE HERE IF NEEDED =========
 
 	// Getter for width
-	int width() const { return m_width; }
+	size_t width() const { return m_width; }
 
 	// Getter for height
-	int height() const { return m_height; }
+	size_t height() const { return m_height; }
 
 	// Convert pixel type.
 	template<typename NewPixelType, typename ConvFunc>
