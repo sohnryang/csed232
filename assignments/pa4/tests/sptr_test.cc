@@ -87,6 +87,14 @@ TEST(SharedPtr, Assign) {
                                      LogEntry(LogKind::CREATED, "Assign2"),
                                      LogEntry(LogKind::DELETED, "Assign2"),
                                      LogEntry(LogKind::DELETED, "Assign")));
+
+  alloc_log.clear();
+  {
+    SharedPtr<DummyClass> ptr(new DummyClass("Assign3", alloc_log));
+    ptr = SharedPtr<DummyClass>(ptr);
+  }
+  EXPECT_THAT(alloc_log, ElementsAre(LogEntry(LogKind::CREATED, "Assign3"),
+                                     LogEntry(LogKind::DELETED, "Assign3")));
 }
 
 TEST(SharedPtr, AssignChaining) {
