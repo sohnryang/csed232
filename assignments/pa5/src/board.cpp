@@ -41,10 +41,10 @@ std::vector<BoardEntry> Board::column_at(int index) const {
 
 BoardMatrix Board::get_board_matrix() const { return board_matrix; }
 
-std::pair<std::vector<Block>, int>
+std::pair<std::vector<Block>, std::vector<std::pair<Block, int>>>
 Board::reduce_line(const std::vector<BoardEntry> &line) {
   std::vector<Block> res;
-  int score = 0;
+  std::vector<std::pair<Block, int>> created_blocks;
   BoardEntry last;
   for (const auto &entry : line) {
     if (!entry.has_value())
@@ -54,8 +54,9 @@ Board::reduce_line(const std::vector<BoardEntry> &line) {
       continue;
     }
     if (last == entry) {
-      score += 1 << (last.value().get_power() + 1);
-      res.push_back({last.value().get_power() + 1});
+      Block new_block = last.value().get_power() + 1;
+      created_blocks.push_back({new_block, res.size()});
+      res.push_back(new_block);
       last.reset();
       continue;
     }
@@ -64,7 +65,7 @@ Board::reduce_line(const std::vector<BoardEntry> &line) {
   }
   if (last.has_value())
     res.push_back(last.value());
-  return {res, score};
+  return {res, created_blocks};
 }
 
 bool Board::is_reducible(const std::vector<BoardEntry> &line) {
@@ -97,8 +98,10 @@ bool Board::is_finished() const {
   return !check_movable();
 }
 
-int Board::move_board(InputKind input) {
-  int score = 0, direction = 1;
+std::vector<std::pair<Block, std::pair<int, int>>>
+Board::move_board(InputKind input) {
+  int direction = 1;
+  std::vector<std::pair<Block, std::pair<int, int>>> created_blocks;
   if (input == InputKind::DOWN || input == InputKind::RIGHT)
     direction = -1;
   for (int i = 0; i < 4; i++) {
@@ -109,8 +112,23 @@ int Board::move_board(InputKind input) {
       line = row_at(i);
     if (input == InputKind::DOWN || input == InputKind::RIGHT)
       std::reverse(line.begin(), line.end());
-    auto [reduced, line_score] = reduce_line(line);
-    score += line_score;
+    auto [reduced, created_blocks_line] = reduce_line(line);
+    std::transform(
+        created_blocks_line.begin(), created_blocks_line.end(),
+        std::back_inserter(created_blocks),
+        [&input, i](const auto &v) -> std::pair<Block, std::pair<int, int>> {
+          const auto &[block, line_idx] = v;
+          switch (input) {
+          case InputKind::UP:
+            return {block, {line_idx, i}};
+          case InputKind::DOWN:
+            return {block, {3 - line_idx, i}};
+          case InputKind::LEFT:
+            return {block, {i, line_idx}};
+          case InputKind::RIGHT:
+            return {block, {i, 3 - line_idx}};
+          }
+        });
     int empty_start = 0;
     if (input == InputKind::UP || input == InputKind::DOWN) {
       BoardMatrix::iterator it;
@@ -146,5 +164,8 @@ int Board::move_board(InputKind input) {
       }
     }
   }
-  return score;
+  std::sort(
+      created_blocks.begin(), created_blocks.end(),
+      [](const auto &v1, const auto &v2) { return v1.second < v2.second; });
+  return created_blocks;
 }

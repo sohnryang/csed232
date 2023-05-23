@@ -31,12 +31,13 @@ public:
   std::vector<BoardEntry> column_at(int index) const;
   BoardMatrix get_board_matrix() const;
 
-  static std::pair<std::vector<Block>, int>
+  static std::pair<std::vector<Block>, std::vector<std::pair<Block, int>>>
   reduce_line(const std::vector<BoardEntry> &line);
   static bool is_reducible(const std::vector<BoardEntry> &line);
 
   std::vector<std::pair<int, int>> vacant_pos() const;
   bool check_movable() const;
   bool is_finished() const;
-  int move_board(InputKind input);
+  std::vector<std::pair<Block, std::pair<int, int>>>
+  move_board(InputKind input);
 };
