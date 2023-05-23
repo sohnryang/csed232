@@ -131,6 +131,29 @@ TEST(Board, IsFinished) {
   }
 }
 
+TEST(Board, IsEffectiveMove) {
+  {
+    Board b({BoardRow{1, 2, 3, 4},
+             {5, 6, 7, 8},
+             {9, 10, 11, 12},
+             {13, 14, 15, 16}});
+    EXPECT_FALSE(b.is_effective_move(InputKind::UP));
+    EXPECT_FALSE(b.is_effective_move(InputKind::DOWN));
+    EXPECT_FALSE(b.is_effective_move(InputKind::LEFT));
+    EXPECT_FALSE(b.is_effective_move(InputKind::RIGHT));
+  }
+  {
+    Board b({BoardRow{1, {}, {}, {}},
+             {1, {}, {}, {}},
+             {1, {}, {}, {}},
+             {1, {}, {}, {}}});
+    EXPECT_TRUE(b.is_effective_move(InputKind::UP));
+    EXPECT_TRUE(b.is_effective_move(InputKind::DOWN));
+    EXPECT_FALSE(b.is_effective_move(InputKind::LEFT));
+    EXPECT_TRUE(b.is_effective_move(InputKind::RIGHT));
+  }
+}
+
 TEST(Board, MoveBoard) {
   {
     Board b;
