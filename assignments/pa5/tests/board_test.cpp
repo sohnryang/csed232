@@ -53,6 +53,12 @@ TEST(Board, ColAt) {
   EXPECT_THAT(b.column_at(1), ElementsAre(Eq(2), Eq(6), Eq(10), Eq(14)));
 }
 
+TEST(Board, VacantPos) {
+  Board b(
+      {BoardRow{1, 2, 3, 4}, {6, {}, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}});
+  EXPECT_THAT(b.vacant_pos(), ElementsAre(Eq(std::make_pair(1, 1))));
+}
+
 TEST(Board, Compactify) {
   {
     std::vector<BoardEntry> line = {{}, 1, 1, {}};
