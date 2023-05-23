@@ -22,10 +22,8 @@ TEST(Board, Init) {
 }
 
 TEST(Board, Index) {
-  Board b({std::array<BoardEntry, 4>{1, 2, 3, 4},
-           {5, 6, 7, 8},
-           {9, 10, 11, 12},
-           {13, 14, 15, 16}});
+  Board b(
+      {BoardRow{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}});
   for (int y = 0; y < 4; y++)
     for (int x = 0; x < 4; x++) {
       auto block = b[{y, x}];
@@ -40,10 +38,8 @@ TEST(Board, Index) {
 }
 
 TEST(Board, RowAt) {
-  Board b({std::array<BoardEntry, 4>{1, 2, 3, 4},
-           {5, 6, 7, 8},
-           {9, 10, 11, 12},
-           {13, 14, 15, 16}});
+  Board b(
+      {BoardRow{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}});
   EXPECT_THAT(b.row_at(0), ElementsAre(Eq(1), Eq(2), Eq(3), Eq(4)));
   EXPECT_THAT(b.row_at(1), ElementsAre(Eq(5), Eq(6), Eq(7), Eq(8)));
 }
@@ -90,14 +86,14 @@ TEST(Board, CheckMovable) {
     EXPECT_FALSE(b.check_movable());
   }
   {
-    Board b({std::array<BoardEntry, 4>{1, 2, 3, 4},
+    Board b({BoardRow{1, 2, 3, 4},
              {5, 6, 7, 8},
              {9, 10, 11, 12},
              {13, 14, 15, 16}});
     EXPECT_FALSE(b.check_movable());
   }
   {
-    Board b({std::array<BoardEntry, 4>{1, {}, {}, {}},
+    Board b({BoardRow{1, {}, {}, {}},
              {1, {}, {}, {}},
              {1, {}, {}, {}},
              {1, {}, {}, {}}});
@@ -111,14 +107,14 @@ TEST(Board, IsFinished) {
     EXPECT_FALSE(b.is_finished());
   }
   {
-    Board b({std::array<BoardEntry, 4>{1, 2, 3, 4},
+    Board b({BoardRow{1, 2, 3, 4},
              {5, 6, 7, 8},
              {9, 10, 11, 12},
              {13, 14, 15, 16}});
     EXPECT_TRUE(b.is_finished());
   }
   {
-    Board b({std::array<BoardEntry, 4>{1, {}, {}, {}},
+    Board b({BoardRow{1, {}, {}, {}},
              {1, {}, {}, {}},
              {1, {}, {}, {}},
              {1, {}, {}, {}}});
@@ -134,7 +130,7 @@ TEST(Board, MoveBoard) {
     EXPECT_EQ(b.get_board_matrix(), bm);
   }
   {
-    Board b({std::array<BoardEntry, 4>{1, 2, 3, 4},
+    Board b({BoardRow{1, 2, 3, 4},
              {5, 6, 7, 8},
              {9, 10, 11, 12},
              {13, 14, 15, 16}});
