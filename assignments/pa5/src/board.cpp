@@ -98,6 +98,31 @@ bool Board::is_finished() const {
   return !check_movable();
 }
 
+bool Board::is_effective_move(InputKind input) const {
+  for (int i = 0; i < 4; i++) {
+    std::vector<BoardEntry> line;
+    switch (input) {
+    case InputKind::UP:
+      line = column_at(i);
+      break;
+    case InputKind::DOWN:
+      line = column_at(i);
+      std::reverse(line.begin(), line.end());
+      break;
+    case InputKind::LEFT:
+      line = row_at(i);
+      break;
+    case InputKind::RIGHT:
+      line = row_at(i);
+      std::reverse(line.begin(), line.end());
+      break;
+    }
+    if (is_reducible(line))
+      return true;
+  }
+  return false;
+}
+
 std::vector<std::pair<Block, std::pair<int, int>>>
 Board::move_board(InputKind input) {
   int direction = 1;

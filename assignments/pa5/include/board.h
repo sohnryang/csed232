@@ -38,6 +38,7 @@ public:
   std::vector<std::pair<int, int>> vacant_pos() const;
   bool check_movable() const;
   bool is_finished() const;
+  bool is_effective_move(InputKind input) const;
   std::vector<std::pair<Block, std::pair<int, int>>>
   move_board(InputKind input);
 };
