@@ -102,10 +102,7 @@ TEST(Board, CheckMovable) {
     EXPECT_FALSE(b.check_movable());
   }
   {
-    Board b({BoardRow{1, {}, {}, {}},
-             {1, {}, {}, {}},
-             {1, {}, {}, {}},
-             {1, {}, {}, {}}});
+    Board b({BoardRow{1}, {1}, {1}, {1}});
     EXPECT_TRUE(b.check_movable());
   }
 }
@@ -123,10 +120,7 @@ TEST(Board, IsFinished) {
     EXPECT_TRUE(b.is_finished());
   }
   {
-    Board b({BoardRow{1, {}, {}, {}},
-             {1, {}, {}, {}},
-             {1, {}, {}, {}},
-             {1, {}, {}, {}}});
+    Board b({BoardRow{1}, {1}, {1}, {1}});
     EXPECT_FALSE(b.is_finished());
   }
 }
@@ -143,10 +137,7 @@ TEST(Board, IsEffectiveMove) {
     EXPECT_FALSE(b.is_effective_move(InputKind::RIGHT));
   }
   {
-    Board b({BoardRow{1, {}, {}, {}},
-             {1, {}, {}, {}},
-             {1, {}, {}, {}},
-             {1, {}, {}, {}}});
+    Board b({BoardRow{1}, {1}, {1}, {1}});
     EXPECT_TRUE(b.is_effective_move(InputKind::UP));
     EXPECT_TRUE(b.is_effective_move(InputKind::DOWN));
     EXPECT_FALSE(b.is_effective_move(InputKind::LEFT));
