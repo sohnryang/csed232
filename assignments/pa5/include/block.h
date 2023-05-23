@@ -7,9 +7,9 @@ private:
   int power;
 
 public:
-  Block();
+  Block() = default;
   Block(int power);
-  Block(const Block &that);
+  Block(const Block &that) = default;
 
   Block &operator=(const Block &that) = default;
   bool operator==(const Block &rhs) const;
