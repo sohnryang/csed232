@@ -1,4 +1,4 @@
-add_executable(pa5_tests board_test.cpp)
+add_executable(pa5_tests board_test.cpp logging_test.cpp)
 target_compile_features(pa5_tests PRIVATE cxx_std_17)
 target_link_libraries(
   pa5_tests
