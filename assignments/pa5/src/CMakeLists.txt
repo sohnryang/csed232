@@ -8,7 +8,13 @@ else()
   find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
   qt_standard_project_setup()
 
-  qt_add_executable(pa5 main.cpp mainwindow.cpp ../include/mainwindow.h)
+  qt_add_executable(
+    pa5
+    main.cpp
+    mainwindow.cpp
+    ../include/mainwindow.h
+    blockui.cpp
+    ../include/blockui.h)
   target_include_directories(pa5 PRIVATE "${PA5_ROOT}/include")
   target_compile_features(pa5 PRIVATE cxx_std_17)
   target_link_libraries(
