@@ -14,7 +14,9 @@ else()
     mainwindow.cpp
     ../include/mainwindow.h
     blockui.cpp
-    ../include/blockui.h)
+    ../include/blockui.h
+    gameui.cpp
+    ../include/gameui.h)
   target_include_directories(pa5 PRIVATE "${PA5_ROOT}/include")
   target_compile_features(pa5 PRIVATE cxx_std_17)
   target_link_libraries(
