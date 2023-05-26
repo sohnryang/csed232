@@ -48,6 +48,10 @@ bool Game::is_win() const {
 
 bool Game::is_lost() const { return board.is_finished(); }
 
+bool Game::is_undo_buffer_empty() const {
+  return !last_board_matrix.has_value();
+}
+
 OpResult Game::move_board(InputKind input) {
   if (board.is_finished())
     return OpResult::GAME_OVER;
@@ -55,20 +59,24 @@ OpResult Game::move_board(InputKind input) {
     return OpResult::INEFFECTIVE_MOVE;
   last_board_matrix = board.get_board_matrix();
   auto created = board.move_board(input);
+  last_score = score;
   score += std::transform_reduce(
       created.cbegin(), created.cend(), 0, std::plus{},
       [](const auto &v) { return 1 << v.first.get_power(); });
   return OpResult::OK;
 }
 
-OpResult Game::undo() {
+void Game::undo() {
   if (!last_board_matrix.has_value())
-    return OpResult::UNDO_BUF_EMPTY;
+    return;
   if (undo_left <= 0)
-    return OpResult::UNDO_COUNT_ZERO;
+    return;
   board = Board(last_board_matrix.value());
+  last_board_matrix.reset();
+  score = last_score.value();
+  last_score.reset();
   undo_left--;
-  return OpResult::OK;
+  return;
 }
 
 int Game::get_score() const { return score; }
