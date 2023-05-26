@@ -26,6 +26,10 @@ private:
 
   void update_ui();
 
+private slots:
+  void exit_button_click();
+  void restore_button_click();
+
 public:
   GameUi();
   ~GameUi();

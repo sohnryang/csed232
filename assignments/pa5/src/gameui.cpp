@@ -3,6 +3,7 @@
 #include "board.h"
 #include "game.h"
 
+#include <QApplication>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QKeyEvent>
@@ -47,6 +48,9 @@ GameUi::GameUi()
   score_label->setStyleSheet("font: 50pt;");
   score_label->setAlignment(Qt::AlignCenter);
 
+  connect(exit_button, &QPushButton::clicked, this, &GameUi::exit_button_click);
+  connect(restore_button, &QPushButton::clicked, this,
+          &GameUi::restore_button_click);
   update_ui();
 }
 
@@ -69,6 +73,35 @@ void GameUi::update_ui() {
   st << "Score: ";
   st << current_game.get_score();
   score_label->setText(st.str().c_str());
+}
+
+void GameUi::exit_button_click() { QApplication::exit(); }
+
+void GameUi::restore_button_click() {
+  if (current_game.is_undo_buffer_empty()) {
+    QMessageBox message;
+    message.setText("There is no previously saved board in the buffer.");
+    message.setWindowTitle("Restore");
+    message.exec();
+    return;
+  } else if (current_game.get_undo_left() <= 0) {
+    QMessageBox message;
+    message.setText(
+        "No more chance to restore the board to its previous state.");
+    message.setWindowTitle("Restore");
+    message.exec();
+    return;
+  }
+  std::ostringstream st;
+  st << "Restore the game board to its previous state?" << std::endl
+     << std::endl
+     << "Remaining chances: " << current_game.get_undo_left();
+  auto reply = QMessageBox::question(this, "Restore", st.str().c_str(),
+                                     QMessageBox::Yes | QMessageBox::No);
+  if (reply == QMessageBox::No)
+    return;
+  current_game.undo();
+  update_ui();
 }
 
 void GameUi::keyPressEvent(QKeyEvent *event) {
