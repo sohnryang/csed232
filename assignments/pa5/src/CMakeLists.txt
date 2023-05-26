@@ -1,4 +1,4 @@
-add_library(pa5lib block.cpp board.cpp logging.cpp)
+add_library(pa5lib block.cpp board.cpp logging.cpp game.cpp)
 target_include_directories(pa5lib PRIVATE "${PA5_ROOT}/include")
 target_compile_features(pa5lib PRIVATE cxx_std_17)
 
