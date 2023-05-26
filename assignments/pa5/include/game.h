@@ -3,9 +3,9 @@
 #include "board.h"
 
 #include <cstdint>
+#include <fstream>
 #include <memory>
 #include <optional>
-#include <ostream>
 #include <random>
 #include <utility>
 
@@ -21,11 +21,10 @@ private:
 
   std::mt19937 rng;
 
-  std::unique_ptr<std::ostream> output_stream;
+  std::ofstream output_stream;
 
 public:
-  Game();
-  Game(uint32_t seed, std::unique_ptr<std::ostream> output_stream);
+  Game(uint32_t seed);
 
   void add_block();
   OpResult move_board(InputKind input);

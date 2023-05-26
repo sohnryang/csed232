@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include <fstream>
 #include <memory>
 
 class GameUi : public QWidget {
@@ -23,6 +24,7 @@ private:
   QPushButton *exit_button;
   QLabel *score_label;
   Game current_game;
+  std::ofstream log_stream;
 
   void update_ui();
 

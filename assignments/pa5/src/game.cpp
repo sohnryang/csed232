@@ -1,31 +1,37 @@
 #include "game.h"
 #include "block.h"
 #include "board.h"
+#include "logging.h"
 
 #include <algorithm>
 #include <cstdint>
 #include <fstream>
 #include <functional>
+#include <ios>
 #include <memory>
 #include <numeric>
 #include <ostream>
 #include <random>
 #include <utility>
 
-Game::Game()
-    : Game(std::random_device()(),
-           std::make_unique<std::ofstream>("progress.txt")) {}
-
-Game::Game(uint32_t seed, std::unique_ptr<std::ostream> output_stream)
-    : rng(seed), output_stream(std::move(output_stream)) {
+Game::Game(uint32_t seed) : rng(seed), output_stream("progress.txt") {
   std::uniform_int_distribution<> first_dist(0, 15);
   int first_idx = first_dist(rng);
   std::uniform_int_distribution<> second_dist(0, 14);
   int second_idx = second_dist(rng);
-  if (second_idx >= first_idx)
+  if (second_idx >= first_idx) {
     second_idx++;
-  board[{first_idx / 4, first_idx % 4}] = 1;
-  board[{second_idx / 4, second_idx % 4}] = 1;
+    std::swap(first_idx, second_idx);
+  }
+
+  int first_y = first_idx / 4, first_x = first_idx % 4,
+      second_y = second_idx / 4, second_x = second_idx % 4;
+  board[{first_y, first_x}] = 1;
+  board[{second_y, second_x}] = 1;
+  this->output_stream << LogEntry(LogEntryKind::INITIAL,
+                                  {first_y + 1, first_x + 1, second_y + 1,
+                                   second_x + 1})
+                      << std::endl;
 }
 
 void Game::add_block() {
@@ -35,7 +41,12 @@ void Game::add_block() {
   std::uniform_int_distribution<> pos_dist(0, vacancies.size() - 1);
   auto pos = vacancies[pos_dist(rng)];
   std::uniform_int_distribution<> power_dist(1, 5);
-  board[pos] = power_dist(rng) == 1 ? 2 : 1;
+  int new_block_power = power_dist(rng) == 1 ? 2 : 1;
+  board[pos] = new_block_power;
+  output_stream << LogEntry(
+                       LogEntryKind::GENERATE,
+                       {pos.first + 1, pos.second + 1, 1 << new_block_power})
+                << std::endl;
 }
 
 bool Game::is_win() const {
@@ -55,6 +66,10 @@ bool Game::is_undo_buffer_empty() const {
 OpResult Game::move_board(InputKind input) {
   if (board.is_finished())
     return OpResult::GAME_OVER;
+  output_stream << LogEntry(
+                       static_cast<LogEntryKind>(static_cast<int>(input) + 1),
+                       {})
+                << std::endl;
   if (!board.is_effective_move(input))
     return OpResult::INEFFECTIVE_MOVE;
   last_board_matrix = board.get_board_matrix();
@@ -63,6 +78,13 @@ OpResult Game::move_board(InputKind input) {
   score += std::transform_reduce(
       created.cbegin(), created.cend(), 0, std::plus{},
       [](const auto &v) { return 1 << v.first.get_power(); });
+  for (const auto &v : created) {
+    auto [y, x] = v.second;
+    output_stream << LogEntry(LogEntryKind::MERGE,
+                              {x + 1, y + 1, 1 << v.first.get_power()})
+                  << std::endl;
+  }
+  output_stream << LogEntry(LogEntryKind::SCORE, {score}) << std::endl;
   return OpResult::OK;
 }
 
@@ -76,6 +98,7 @@ void Game::undo() {
   score = last_score.value();
   last_score.reset();
   undo_left--;
+  output_stream << LogEntry(LogEntryKind::RESTORE, {undo_left}) << std::endl;
   return;
 }
 

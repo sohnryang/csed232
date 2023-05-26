@@ -14,13 +14,14 @@
 #include <QVBoxLayout>
 #include <Qt>
 
+#include <random>
 #include <sstream>
 
 GameUi::GameUi()
     : root(new QHBoxLayout(this)), board_grid(new QGridLayout()),
       sidebar(new QVBoxLayout()), restore_button(new QPushButton("Restore")),
       exit_button(new QPushButton("Exit")), score_label(new QLabel("Score: 0")),
-      current_game() {
+      current_game(std::random_device()()) {
   resize(1300, 1000);
 
   root->addLayout(board_grid, 10);
