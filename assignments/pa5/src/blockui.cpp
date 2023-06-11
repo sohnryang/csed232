@@ -23,8 +23,8 @@ BlockUi::BlockUi(QWidget *parent) : QLabel("", parent) {
 }
 
 BlockUi::BlockUi(QWidget *parent, const Block &block_data)
-    : block_data(block_data),
-      QLabel(std::to_string(1 << block_data.get_power()).c_str(), parent) {
+    : QLabel(std::to_string(1 << block_data.get_power()).c_str(), parent),
+      block_data(block_data) {
   // Resize the label to specified size.
   resize(250, 250);
   auto [r, g, b] = color_table.at(block_data.get_power());
