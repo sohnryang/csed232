@@ -90,16 +90,16 @@ void GameUi::update_ui() {
 void GameUi::exit_button_click() { QApplication::exit(); }
 
 void GameUi::restore_button_click() {
-  if (current_game.is_undo_buffer_empty()) {
-    QMessageBox message; // message box to show
-    message.setText("There is no previously saved board in the buffer.");
-    message.setWindowTitle("Restore");
-    message.exec(); // show the message box
-    return;
-  } else if (current_game.get_undo_left() <= 0) {
+  if (current_game.get_undo_left() <= 0) {
     QMessageBox message; // message box to show
     message.setText(
         "No more chance to restore the board to its previous state.");
+    message.setWindowTitle("Restore");
+    message.exec(); // show the message box
+    return;
+  } else if (current_game.is_undo_buffer_empty()) {
+    QMessageBox message; // message box to show
+    message.setText("There is no previously saved board in the buffer.");
     message.setWindowTitle("Restore");
     message.exec(); // show the message box
     return;
