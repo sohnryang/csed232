@@ -178,7 +178,7 @@ Board::move_board(InputKind input) {
       else
         it = board_matrix[i].begin() + 3;
       std::for_each(reduced.begin(), reduced.end(),
-                    [&it, i, direction, &empty_start](const auto &v) {
+                    [&it, direction, &empty_start](const auto &v) {
                       *it = v;
                       it += direction;
                       empty_start++;
