@@ -144,8 +144,7 @@ void GameUi::keyPressEvent(QKeyEvent *event) {
     return;
   }
   if (res == MoveResult::INEFFECTIVE_MOVE)
-    return;                 // do nothing if the move is ineffective
-  current_game.add_block(); // add a block to the board
+    return; // do nothing if the move is ineffective
   update_ui();
   // Check the winning condition.
   if (current_game.is_win()) {

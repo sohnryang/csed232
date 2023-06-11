@@ -99,9 +99,10 @@ MoveResult Game::move_board(InputKind input) {
   for (const auto &v : created) {
     auto [y, x] = v.second;
     output_stream << LogEntry(LogEntryKind::MERGE,
-                              {x + 1, y + 1, 1 << v.first.get_power()})
+                              {y + 1, x + 1, 1 << v.first.get_power()})
                   << std::endl;
   }
+  add_block(); // add a block to the board
   // Log score.
   output_stream << LogEntry(LogEntryKind::SCORE, {score}) << std::endl;
   return MoveResult::OK;
