@@ -1,4 +1,4 @@
-#include "board.h"
+#include "src/board.h"
 
 #include <cstddef>
 #include <cstdint>

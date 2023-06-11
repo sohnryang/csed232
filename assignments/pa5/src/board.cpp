@@ -1,5 +1,5 @@
-#include "board.h"
-#include "block.h"
+#include "src/board.h"
+#include "src/block.h"
 
 #include <algorithm>
 #include <iterator>

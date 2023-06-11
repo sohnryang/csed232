@@ -1,7 +1,7 @@
-#include "game.h"
-#include "block.h"
-#include "board.h"
-#include "logging.h"
+#include "src/game.h"
+#include "src/block.h"
+#include "src/board.h"
+#include "src/logging.h"
 
 #include <algorithm>
 #include <cstdint>

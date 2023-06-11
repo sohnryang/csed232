@@ -1,5 +1,5 @@
-#include "blockui.h"
-#include "block.h"
+#include "ui/blockui.h"
+#include "src/block.h"
 
 #include <Qt>
 

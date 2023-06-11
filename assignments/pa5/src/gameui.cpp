@@ -1,7 +1,7 @@
-#include "gameui.h"
-#include "blockui.h"
-#include "board.h"
-#include "game.h"
+#include "ui/gameui.h"
+#include "src/board.h"
+#include "src/game.h"
+#include "ui/blockui.h"
 
 #include <QApplication>
 #include <QGridLayout>

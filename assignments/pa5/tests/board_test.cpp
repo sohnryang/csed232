@@ -1,5 +1,5 @@
-#include "block.h"
-#include "board.h"
+#include "src/block.h"
+#include "src/board.h"
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

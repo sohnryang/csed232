@@ -1,4 +1,4 @@
-#include "block.h"
+#include "src/block.h"
 
 Block::Block(int power) : power(power) {}
 

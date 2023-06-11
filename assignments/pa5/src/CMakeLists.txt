@@ -12,11 +12,11 @@ else()
     pa5
     main.cpp
     mainwindow.cpp
-    ../include/mainwindow.h
+    ../include/ui/mainwindow.h
     blockui.cpp
-    ../include/blockui.h
+    ../include/ui/blockui.h
     gameui.cpp
-    ../include/gameui.h)
+    ../include/ui/gameui.h)
   target_include_directories(pa5 PRIVATE "${PA5_ROOT}/include")
   target_compile_features(pa5 PRIVATE cxx_std_17)
   target_link_libraries(

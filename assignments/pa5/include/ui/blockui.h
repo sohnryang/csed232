@@ -1,6 +1,6 @@
 #pragma once
 
-#include "block.h"
+#include "src/block.h"
 
 #include <QLabel>
 #include <QWidget>
