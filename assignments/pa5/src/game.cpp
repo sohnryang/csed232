@@ -16,23 +16,12 @@
 
 Game::Game(uint32_t seed) : rng(seed), output_stream("progress.txt") {
   // Randomly add two 2-blocks.
-  std::uniform_int_distribution<> first_dist(0, 15);
-  int first_idx = first_dist(rng);
-  std::uniform_int_distribution<> second_dist(0, 14);
-  int second_idx = second_dist(rng);
-
-  // Avoid placing two blocks in same position.
-  if (second_idx >= first_idx) {
-    second_idx++;
-    std::swap(first_idx, second_idx);
-  }
-
-  // Calculate coordinates.
-  int first_y = first_idx / 4, first_x = first_idx % 4,
-      second_y = second_idx / 4, second_x = second_idx % 4;
-  // Actually place the blocks to the board.
-  board[{first_y, first_x}] = 1;
-  board[{second_y, second_x}] = 1;
+  auto first_block_pos = add_block(true, false).value(),
+       second_block_pos = add_block(true, false).value();
+  if (first_block_pos > second_block_pos)
+    std::swap(first_block_pos, second_block_pos);
+  auto [first_y, first_x] = first_block_pos;
+  auto [second_y, second_x] = second_block_pos;
 
   // Log the block placements.
   this->output_stream << LogEntry(LogEntryKind::INITIAL,
