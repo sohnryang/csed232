@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 
+// Enum for log entry types.
 enum class LogEntryKind {
   INITIAL = 0,
   UP = 1,
@@ -16,6 +17,8 @@ enum class LogEntryKind {
   SCORE = 8,
 };
 
+// Type alias for log entry.
 using LogEntry = std::pair<LogEntryKind, std::vector<int>>;
 
+// Operator overload for outputting to stream.
 std::ostream &operator<<(std::ostream &os, const LogEntry &entry);

@@ -15,7 +15,9 @@ const std::map<int, std::tuple<int, int, int>> BlockUi::color_table = {
     {10, {237, 197, 63}}, {11, {237, 194, 46}}};
 
 BlockUi::BlockUi(QWidget *parent) : QLabel("", parent) {
+  // Resize the label to specified size.
   resize(250, 250);
+  // Default color is white.
   setStyleSheet("QLabel { background: rgb(255, 255, 255); color: black; "
                 "border-style: solid; font: 70pt; font: bold; }");
 }
@@ -23,6 +25,7 @@ BlockUi::BlockUi(QWidget *parent) : QLabel("", parent) {
 BlockUi::BlockUi(QWidget *parent, const Block &block_data)
     : block_data(block_data),
       QLabel(std::to_string(1 << block_data.get_power()).c_str(), parent) {
+  // Resize the label to specified size.
   resize(250, 250);
   auto [r, g, b] = color_table.at(block_data.get_power());
   std::stringstream st;

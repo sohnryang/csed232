@@ -3,6 +3,7 @@
 #include <ostream>
 
 std::ostream &operator<<(std::ostream &os, const LogEntry &entry) {
+  // Output the log entry kind.
   switch (entry.first) {
   case LogEntryKind::INITIAL:
     os << "INITIAL";
@@ -32,6 +33,7 @@ std::ostream &operator<<(std::ostream &os, const LogEntry &entry) {
     os << "SCORE";
     break;
   }
+  // Output the log data.
   for (const auto &v : entry.second)
     os << " " << v;
   return os;
