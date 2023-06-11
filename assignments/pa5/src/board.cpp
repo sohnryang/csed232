@@ -69,9 +69,9 @@ Board::reduce_line(const std::vector<BoardEntry> &line) {
 }
 
 bool Board::is_reducible(const std::vector<BoardEntry> &line) {
-  auto compactified = reduce_line(line).first;
-  for (int i = 0; i < compactified.size(); i++)
-    if (compactified[i] != line[i])
+  auto reduced = reduce_line(line).first;
+  for (int i = 0; i < reduced.size(); i++)
+    if (reduced[i] != line[i])
       return true;
   return false;
 }
