@@ -34,7 +34,6 @@ private slots:
 
 public:
   GameUi();
-  ~GameUi();
 
   void keyPressEvent(QKeyEvent *event) override;
 };
