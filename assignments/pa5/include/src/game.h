@@ -9,8 +9,8 @@
 #include <random>
 #include <utility>
 
-// Operator results.
-enum class OpResult { OK, GAME_OVER, INEFFECTIVE_MOVE };
+// Move results.
+enum class MoveResult { OK, GAME_OVER, INEFFECTIVE_MOVE };
 
 class Game {
 private:
@@ -43,7 +43,7 @@ public:
   void add_block();
 
   // Move the board with given input.
-  OpResult move_board(InputKind input);
+  MoveResult move_board(InputKind input);
 
   // Undo the game.
   void undo();

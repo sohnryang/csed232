@@ -131,7 +131,7 @@ void GameUi::keyPressEvent(QKeyEvent *event) {
   else
     return; // ignore other keys
   auto res = current_game.move_board(dir);
-  if (res == OpResult::GAME_OVER) {
+  if (res == MoveResult::GAME_OVER) {
     QMessageBox message; // message box to show
     // Create message text using string stream.
     std::ostringstream st;
@@ -143,7 +143,7 @@ void GameUi::keyPressEvent(QKeyEvent *event) {
     message.exec(); // show the message box
     return;
   }
-  if (res == OpResult::INEFFECTIVE_MOVE)
+  if (res == MoveResult::INEFFECTIVE_MOVE)
     return;                 // do nothing if the move is ineffective
   current_game.add_block(); // add a block to the board
   update_ui();

@@ -78,16 +78,16 @@ bool Game::is_undo_buffer_empty() const {
   return !last_board_matrix.has_value();
 }
 
-OpResult Game::move_board(InputKind input) {
-  if (board.is_finished())
-    return OpResult::GAME_OVER;
+MoveResult Game::move_board(InputKind input) {
+  if (board.is_finished()) // check game over
+    return MoveResult::GAME_OVER;
   // Log the input.
   output_stream << LogEntry(
                        static_cast<LogEntryKind>(static_cast<int>(input) + 1),
                        {})
                 << std::endl;
-  if (!board.is_effective_move(input))
-    return OpResult::INEFFECTIVE_MOVE;
+  if (!board.is_effective_move(input)) // check if the move is effective
+    return MoveResult::INEFFECTIVE_MOVE;
 
   // Save the last state to undo buffer.
   last_board_matrix = board.get_board_matrix();
@@ -107,7 +107,7 @@ OpResult Game::move_board(InputKind input) {
   }
   // Log score.
   output_stream << LogEntry(LogEntryKind::SCORE, {score}) << std::endl;
-  return OpResult::OK;
+  return MoveResult::OK;
 }
 
 void Game::undo() {
