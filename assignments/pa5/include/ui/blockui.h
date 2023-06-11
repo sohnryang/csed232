@@ -17,5 +17,5 @@ private:
 
 public:
   BlockUi(QWidget *parent = nullptr);
-  BlockUi(const Block &block_data, QWidget *parent = nullptr);
+  BlockUi(QWidget *parent, const Block &block_data);
 };

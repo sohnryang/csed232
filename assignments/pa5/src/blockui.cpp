@@ -20,7 +20,7 @@ BlockUi::BlockUi(QWidget *parent) : QLabel("", parent) {
                 "border-style: solid; font: 70pt; font: bold; }");
 }
 
-BlockUi::BlockUi(const Block &block_data, QWidget *parent)
+BlockUi::BlockUi(QWidget *parent, const Block &block_data)
     : block_data(block_data),
       QLabel(std::to_string(1 << block_data.get_power()).c_str(), parent) {
   resize(250, 250);
