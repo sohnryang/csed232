@@ -41,26 +41,34 @@ Game::Game(uint32_t seed) : rng(seed), output_stream("progress.txt") {
                       << std::endl;
 }
 
-void Game::add_block() {
+std::optional<std::pair<int, int>> Game::add_block(bool two_only,
+                                                   bool write_log) {
   // Get vacant positions.
   auto vacancies = board.vacant_pos();
   if (vacancies.empty())
-    return; // stop if there is nowhere to add blocks.
+    return {}; // stop if there is nowhere to add blocks.
 
   // Pick a random position.
   std::uniform_int_distribution<> pos_dist(0, vacancies.size() - 1);
   auto pos = vacancies[pos_dist(rng)];
-  std::uniform_int_distribution<> power_dist(1, 5);
   // Determine the number.
-  int new_block_power = power_dist(rng) == 1 ? 2 : 1;
+  int new_block_power;
+  if (two_only)
+    new_block_power = 1;
+  else {
+    std::uniform_int_distribution<> power_dist(1, 5);
+    new_block_power = power_dist(rng) == 1 ? 2 : 1;
+  }
   // Place the block.
   board[pos] = new_block_power;
 
   // Log the block placement.
-  output_stream << LogEntry(
-                       LogEntryKind::GENERATE,
-                       {pos.first + 1, pos.second + 1, 1 << new_block_power})
-                << std::endl;
+  if (write_log)
+    output_stream << LogEntry(
+                         LogEntryKind::GENERATE,
+                         {pos.first + 1, pos.second + 1, 1 << new_block_power})
+                  << std::endl;
+  return pos;
 }
 
 bool Game::is_win() const {

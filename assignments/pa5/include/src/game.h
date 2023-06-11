@@ -40,7 +40,8 @@ public:
   Game(uint32_t seed);
 
   // Add a block to a random position of the board.
-  void add_block();
+  std::optional<std::pair<int, int>> add_block(bool two_only = false,
+                                               bool write_log = true);
 
   // Move the board with given input.
   MoveResult move_board(InputKind input);
