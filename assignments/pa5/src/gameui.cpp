@@ -64,7 +64,7 @@ void GameUi::update_ui() {
       BlockUi *new_widget;
       auto entry = current_game.get_entry(y, x);
       if (entry.has_value())
-        new_widget = new BlockUi(entry.value());
+        new_widget = new BlockUi(nullptr, entry.value());
       else
         new_widget = new BlockUi();
       board_grid->replaceWidget(old_widget, new_widget);
