@@ -53,6 +53,7 @@ GameUi::GameUi()
   connect(restore_button, &QPushButton::clicked, this,
           &GameUi::restore_button_click);
   update_ui();
+  setFocusPolicy(Qt::StrongFocus); // ensure that the widget can get focus
 }
 
 void GameUi::update_ui() {
