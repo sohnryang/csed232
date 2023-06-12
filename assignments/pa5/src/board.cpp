@@ -191,7 +191,7 @@ Board::move_board(InputKind input) {
       // Fill the rest with empty optionals.
       for (int j = empty_start; j < 4; j++) {
         (*it)[i] = {};
-        if (empty_start < 3)
+        if (j < 3)
           it += direction;
       }
     } else {
@@ -210,7 +210,7 @@ Board::move_board(InputKind input) {
       // Fill the rest with empty optionals.
       for (int j = empty_start; j < 4; j++) {
         *it = {};
-        if (empty_start < 3)
+        if (j < 3)
           it += direction;
       }
     }
