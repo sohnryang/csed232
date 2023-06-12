@@ -2,9 +2,7 @@ add_library(pa5lib block.cpp board.cpp logging.cpp game.cpp)
 target_include_directories(pa5lib PRIVATE "${PA5_ROOT}/include")
 target_compile_features(pa5lib PRIVATE cxx_std_17)
 
-if(DEFINED ENV{CI})
-  message(STATUS "CI detected, excluding pa5 target which depends on Qt.")
-else()
+if($ENV{BUILD_QT})
   find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
   qt_standard_project_setup()
 

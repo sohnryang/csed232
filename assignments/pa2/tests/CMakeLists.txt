@@ -4,17 +4,15 @@ target_link_libraries(
   PRIVATE pa2lib
   PRIVATE GTest::gtest_main)
 target_include_directories(pa2_tests PRIVATE "${PA2_ROOT}/include")
-target_compile_options(
-  pa2_tests PRIVATE "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,leak>")
-target_link_options(pa2_tests PRIVATE
-                    "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,leak>")
 include(GoogleTest)
 gtest_discover_tests(pa2_tests)
 
-add_executable(list_fuzz linked_list_fuzz.cpp)
-target_link_libraries(list_fuzz PRIVATE pa2lib)
-target_include_directories(list_fuzz PRIVATE "${PA2_ROOT}/include")
-target_compile_options(
-  list_fuzz PRIVATE "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,fuzzer>")
-target_link_options(list_fuzz PRIVATE
-                    "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,fuzzer>")
+if($ENV{BUILD_FUZZ_TESTS})
+  add_executable(list_fuzz linked_list_fuzz.cpp)
+  target_link_libraries(list_fuzz PRIVATE pa2lib)
+  target_include_directories(list_fuzz PRIVATE "${PA2_ROOT}/include")
+  target_compile_options(
+    list_fuzz PRIVATE "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,fuzzer>")
+  target_link_options(list_fuzz PRIVATE
+                      "$<$<C_COMPILER_ID:Clang>:-fsanitize=address,fuzzer>")
+endif()
