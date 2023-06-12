@@ -87,7 +87,14 @@ void GameUi::update_ui() {
   score_label->setText(st.str().c_str());
 }
 
-void GameUi::exit_button_click() { QApplication::exit(); }
+void GameUi::exit_button_click() {
+  // Create message text using string stream.
+  auto reply = QMessageBox::question(this, "Exit", "Are you sure to quit?",
+                                     QMessageBox::Yes | QMessageBox::No);
+  if (reply == QMessageBox::No) // abort if the user does not want to quit
+    return;
+  QApplication::exit();
+}
 
 void GameUi::restore_button_click() {
   if (current_game.get_undo_left() <= 0) {
@@ -116,6 +123,10 @@ void GameUi::restore_button_click() {
     return;
   current_game.undo(); // undo the game
   update_ui();
+  QMessageBox message; // message box to show
+  message.setText("The board has been restored to its previous state!");
+  message.setWindowTitle("Restore");
+  message.exec(); // show the message box
 }
 
 void GameUi::keyPressEvent(QKeyEvent *event) {
