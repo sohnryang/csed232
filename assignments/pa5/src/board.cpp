@@ -184,13 +184,15 @@ Board::move_board(InputKind input) {
       std::for_each(reduced.begin(), reduced.end(),
                     [&it, i, direction, &empty_start](const auto &v) {
                       (*it)[i] = v;
-                      it += direction; // this is why we are using `direction`
+                      if (empty_start < 3)
+                        it += direction; // this is why we are using `direction`
                       empty_start++;
                     });
       // Fill the rest with empty optionals.
       for (int j = empty_start; j < 4; j++) {
         (*it)[i] = {};
-        it += direction;
+        if (empty_start < 3)
+          it += direction;
       }
     } else {
       BoardRow::iterator it;
@@ -201,13 +203,15 @@ Board::move_board(InputKind input) {
       std::for_each(reduced.begin(), reduced.end(),
                     [&it, direction, &empty_start](const auto &v) {
                       *it = v;
-                      it += direction; // this is why we are using `direction`
+                      if (empty_start < 3)
+                        it += direction; // this is why we are using `direction`
                       empty_start++;
                     });
       // Fill the rest with empty optionals.
       for (int j = empty_start; j < 4; j++) {
         *it = {};
-        it += direction;
+        if (empty_start < 3)
+          it += direction;
       }
     }
   }
