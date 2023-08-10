@@ -11,7 +11,7 @@
 | 1    | 기본적인 C++ 문법 연습                     |
 | 2    | Linked list를 사용한 pivot table 만들기    |
 | 3    | 상속, 다형성을 이용한 ascii art 프로그램   |
-| 4    | C++의 `std::shared_pointer<T>` 구현해 보기 |
+| 4    | C++의 `std::shared_ptr<T>` 구현해 보기 |
 | 5    | 2048 게임 구현 (with GUI)                  |
 
 ## 빌드 방법
